@@ -1,0 +1,12 @@
+<div class="messages-preview glass-panel">
+  <h3>Latest messages</h3>
+  <div class="messages-preview__list">
+    @for (message of messages; track message.sender) {
+      <div class="messages-preview__item">
+        <span class="messages-preview__sender">{{ message.sender }}</span>
+        <span class="messages-preview__excerpt">{{ message.excerpt }}</span>
+        <span class="messages-preview__time">{{ message.receivedAt }}</span>
+      </div>
+    }
+  </div>
+</div>

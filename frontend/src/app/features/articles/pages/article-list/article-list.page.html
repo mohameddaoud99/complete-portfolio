@@ -1,0 +1,34 @@
+<app-page-header title="Articles" subtitle="Write and manage the blog articles on your portfolio">
+  <a pButton routerLink="/articles/new" icon="pi pi-plus" label="Create Article"></a>
+</app-page-header>
+
+<div class="glass-panel article-list__table">
+  <p-table [value]="articles()" [loading]="loading()" [paginator]="true" [rows]="10" dataKey="id">
+    <ng-template #header>
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-article>
+      <tr>
+        <td>{{ article.title }}</td>
+        <td>
+          <p-tag [value]="article.published ? 'Published' : 'Draft'" [severity]="article.published ? 'success' : 'secondary'" />
+        </td>
+        <td>{{ article.createdAt | date: 'mediumDate' }}</td>
+        <td class="article-list__actions">
+          <button pButton type="button" icon="pi pi-pencil" [text]="true" (click)="edit(article)"></button>
+          <button pButton type="button" icon="pi pi-trash" severity="danger" [text]="true" (click)="confirmDelete(article)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="4">No articles yet. Click "Create Article" to write one.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

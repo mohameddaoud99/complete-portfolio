@@ -1,0 +1,13 @@
+.message-detail__body {
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  max-width: 720px;
+
+  p {
+    margin: 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+}

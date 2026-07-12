@@ -1,0 +1,129 @@
+.article-detail {
+  padding: 3rem 1.5rem 5rem;
+  max-width: 760px;
+}
+
+.article-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 2rem;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.article-detail__category {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.article-detail__header h1 {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.article-detail__meta {
+  display: flex;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.article-detail__cover {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+.article-detail__content {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.85;
+
+  ::ng-deep h2 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem;
+  }
+
+  ::ng-deep h3 {
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    margin: 1.75rem 0 0.75rem;
+  }
+
+  ::ng-deep p {
+    margin: 0 0 1.25rem;
+  }
+
+  ::ng-deep a {
+    color: var(--accent);
+  }
+
+  ::ng-deep img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    margin: 1.5rem 0;
+  }
+
+  ::ng-deep ul,
+  ::ng-deep ol {
+    margin: 0 0 1.25rem;
+    padding-left: 1.4rem;
+  }
+
+  ::ng-deep pre {
+    background: var(--surface-card);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  ::ng-deep blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+}
+
+.article-detail__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+}
+
+.article-detail__tag {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+}

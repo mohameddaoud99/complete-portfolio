@@ -1,0 +1,32 @@
+<app-page-header title="Education" subtitle="Manage your academic background">
+  <a pButton routerLink="/education/new" icon="pi pi-plus" label="Add Education"></a>
+</app-page-header>
+
+<div class="glass-panel education-list__table">
+  <p-table [value]="items()" [loading]="loading()" [paginator]="true" [rows]="10" dataKey="id">
+    <ng-template #header>
+      <tr>
+        <th>Degree</th>
+        <th>Institution</th>
+        <th>Period</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-item>
+      <tr>
+        <td>{{ item.degree }}</td>
+        <td>{{ item.institution }}</td>
+        <td>{{ item.startDate | date: 'MMM y' }} - {{ item.endDate ? (item.endDate | date: 'MMM y') : 'Present' }}</td>
+        <td class="education-list__actions">
+          <button pButton type="button" icon="pi pi-pencil" [text]="true" (click)="edit(item)"></button>
+          <button pButton type="button" icon="pi pi-trash" severity="danger" [text]="true" (click)="confirmDelete(item)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="4">No education entries yet. Click "Add Education" to create one.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

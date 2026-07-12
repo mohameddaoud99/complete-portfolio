@@ -1,0 +1,10 @@
+.education-list__table {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  overflow: hidden;
+}
+
+.education-list__actions {
+  display: flex;
+  gap: 0.25rem;
+}

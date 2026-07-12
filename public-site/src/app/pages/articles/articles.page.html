@@ -1,0 +1,56 @@
+<section class="section container" appReveal>
+  <app-section-heading [title]="i18n.t('articles.title')" [subtitle]="i18n.t('articles.subtitle')" align="center" />
+
+  <div class="articles-toolbar">
+    <div class="articles-search">
+      <lucide-icon [img]="searchIcon" [size]="18" />
+      <input
+        type="text"
+        [placeholder]="i18n.t('articles.search')"
+        [ngModel]="searchTerm()"
+        (ngModelChange)="searchTerm.set($event)"
+      />
+    </div>
+
+    @if (categories().length > 0) {
+      <div class="articles-filter">
+        <button
+          type="button"
+          class="articles-filter__chip"
+          [class.articles-filter__chip--active]="activeCategory() === null"
+          (click)="setCategory(null)"
+        >
+          {{ i18n.t('projects.filter.all') }}
+        </button>
+        @for (category of categories(); track category) {
+          <button
+            type="button"
+            class="articles-filter__chip"
+            [class.articles-filter__chip--active]="activeCategory() === category"
+            (click)="setCategory(category)"
+          >
+            {{ category }}
+          </button>
+        }
+      </div>
+    }
+  </div>
+
+  @if (articles().length > 0) {
+    @if (filteredArticles().length > 0) {
+      <div class="article-grid">
+        @for (article of filteredArticles(); track article.id) {
+          <app-article-card [article]="article" appReveal />
+        }
+      </div>
+    } @else {
+      <p class="articles-empty">{{ i18n.t('articles.noResults') }}</p>
+    }
+  } @else {
+    <div class="article-grid">
+      @for (item of [1, 2, 3]; track item) {
+        <app-skeleton height="18rem" radius="var(--radius-lg)" />
+      }
+    </div>
+  }
+</section>

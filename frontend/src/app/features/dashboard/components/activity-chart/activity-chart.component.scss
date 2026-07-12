@@ -1,0 +1,20 @@
+.activity-chart {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+
+  h3 {
+    margin: 0 0 0.15rem;
+    font-size: 1.05rem;
+  }
+}
+
+.activity-chart__subtitle {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.activity-chart__canvas {
+  height: 260px;
+}

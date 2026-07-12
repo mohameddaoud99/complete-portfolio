@@ -1,0 +1,37 @@
+<app-page-header [title]="isEditMode ? 'Edit Certification' : 'Add Certification'" />
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
+  <div class="form-grid">
+    <div class="field field--full">
+      <label for="name">Name</label>
+      <input pInputText id="name" formControlName="name" placeholder="AWS Certified Solutions Architect" />
+    </div>
+
+    <div class="field">
+      <label for="issuer">Issuer</label>
+      <input pInputText id="issuer" formControlName="issuer" placeholder="Amazon Web Services" />
+    </div>
+
+    <div class="field">
+      <label for="displayOrder">Display order</label>
+      <p-inputnumber id="displayOrder" formControlName="displayOrder" [showButtons]="true" />
+    </div>
+
+    <div class="field">
+      <label for="issueDate">Issue date</label>
+      <p-datepicker id="issueDate" formControlName="issueDate" view="month" dateFormat="mm/yy" [showIcon]="true" />
+    </div>
+
+    <div class="field">
+      <label for="expiryDate">Expiry date (optional)</label>
+      <p-datepicker id="expiryDate" formControlName="expiryDate" view="month" dateFormat="mm/yy" [showIcon]="true" />
+    </div>
+
+    <div class="field field--full">
+      <label for="credentialUrl">Credential URL</label>
+      <input pInputText id="credentialUrl" formControlName="credentialUrl" />
+    </div>
+  </div>
+
+  <button pButton type="submit" label="Save" [loading]="saving()"></button>
+</form>

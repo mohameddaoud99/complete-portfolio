@@ -1,0 +1,16 @@
+<div class="timeline-card glass-panel">
+  <h3>Recent updates</h3>
+  <p-timeline [value]="entries">
+    <ng-template #marker let-entry>
+      <span class="timeline-card__marker" [style.background]="entry.color">
+        <i [class]="entry.icon"></i>
+      </span>
+    </ng-template>
+    <ng-template #content let-entry>
+      <div class="timeline-card__entry">
+        <span class="timeline-card__title">{{ entry.title }}</span>
+        <span class="timeline-card__date">{{ entry.date }}</span>
+      </div>
+    </ng-template>
+  </p-timeline>
+</div>

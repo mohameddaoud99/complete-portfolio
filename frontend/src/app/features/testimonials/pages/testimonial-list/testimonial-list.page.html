@@ -1,0 +1,34 @@
+<app-page-header title="Testimonials" subtitle="Manage recommendations shown on your portfolio">
+  <a pButton routerLink="/testimonials/new" icon="pi pi-plus" label="Add Testimonial"></a>
+</app-page-header>
+
+<div class="glass-panel testimonial-list__table">
+  <p-table [value]="items()" [loading]="loading()" [paginator]="true" [rows]="10" dataKey="id">
+    <ng-template #header>
+      <tr>
+        <th>Author</th>
+        <th>Company</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-item>
+      <tr>
+        <td>{{ item.authorName }}</td>
+        <td>{{ item.authorCompany }}</td>
+        <td>
+          <p-tag [value]="item.published ? 'Published' : 'Hidden'" [severity]="item.published ? 'success' : 'secondary'" />
+        </td>
+        <td class="testimonial-list__actions">
+          <button pButton type="button" icon="pi pi-pencil" [text]="true" (click)="edit(item)"></button>
+          <button pButton type="button" icon="pi pi-trash" severity="danger" [text]="true" (click)="confirmDelete(item)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="4">No testimonials yet. Click "Add Testimonial" to create one.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

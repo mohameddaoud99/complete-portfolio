@@ -1,0 +1,69 @@
+<app-page-header [title]="isEditMode ? 'Edit Project' : 'Add Project'" />
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
+  <app-image-upload [(imageUrl)]="imageUrl" label="Upload project image" />
+
+  <div class="form-grid">
+    <div class="field field--full">
+      <label for="title">Title</label>
+      <input pInputText id="title" formControlName="title" />
+    </div>
+
+    <div class="field field--full">
+      <label for="summary">Summary (English)</label>
+      <input pInputText id="summary" formControlName="summary" placeholder="One-line summary shown in project cards" />
+    </div>
+
+    <div class="field field--full">
+      <label for="summaryFr">Summary (Français)</label>
+      <input pInputText id="summaryFr" formControlName="summaryFr" />
+    </div>
+
+    <div class="field field--full">
+      <label for="description">Description (English)</label>
+      <textarea pTextarea id="description" formControlName="description" rows="5"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="descriptionFr">Description (Français)</label>
+      <textarea pTextarea id="descriptionFr" formControlName="descriptionFr" rows="5"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="techStack">Tech stack (comma-separated)</label>
+      <input pInputText id="techStack" formControlName="techStack" placeholder="Angular, Spring Boot, PostgreSQL" />
+    </div>
+
+    <div class="field">
+      <label for="category">Category</label>
+      <input pInputText id="category" formControlName="category" placeholder="Full Stack, Backend, Frontend..." />
+    </div>
+
+    <div class="field">
+      <label for="repoUrl">Repository URL</label>
+      <input pInputText id="repoUrl" formControlName="repoUrl" />
+    </div>
+
+    <div class="field">
+      <label for="liveUrl">Live URL</label>
+      <input pInputText id="liveUrl" formControlName="liveUrl" />
+    </div>
+
+    <div class="field">
+      <label for="displayOrder">Display order</label>
+      <p-inputnumber id="displayOrder" formControlName="displayOrder" [showButtons]="true" />
+    </div>
+
+    <div class="field field--full">
+      <label for="screenshots">Screenshot URLs (one per line)</label>
+      <textarea pTextarea id="screenshots" formControlName="screenshots" rows="3"></textarea>
+    </div>
+
+    <div class="field project-form__featured">
+      <label for="featured">Featured project</label>
+      <p-toggleswitch id="featured" formControlName="featured" />
+    </div>
+  </div>
+
+  <button pButton type="submit" label="Save" [loading]="saving()"></button>
+</form>

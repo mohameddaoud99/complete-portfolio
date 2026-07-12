@@ -1,0 +1,28 @@
+<a [routerLink]="['/projects', project().slug]" class="project-card glass-panel">
+  <div class="project-card__media">
+    @if (imageUrl()) {
+      <img [src]="imageUrl()" [alt]="project().title" loading="lazy" />
+    } @else {
+      <div class="project-card__placeholder">{{ project().title.charAt(0) }}</div>
+    }
+    @if (project().featured) {
+      <span class="project-card__badge">{{ i18n.t('projects.featured') }}</span>
+    }
+  </div>
+
+  <div class="project-card__body">
+    <h3>{{ project().title }}</h3>
+    <p>{{ summary() }}</p>
+
+    <div class="project-card__tags">
+      @for (tech of techList(); track tech) {
+        <span class="project-card__tag">{{ tech }}</span>
+      }
+    </div>
+
+    <span class="project-card__link">
+      {{ i18n.t('projects.viewProject') }}
+      <lucide-icon [img]="arrowIcon" [size]="16" />
+    </span>
+  </div>
+</a>

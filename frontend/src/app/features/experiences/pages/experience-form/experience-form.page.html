@@ -1,0 +1,62 @@
+<app-page-header [title]="isEditMode ? 'Edit Experience' : 'Add Experience'" />
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
+  <div class="form-grid">
+    <div class="field">
+      <label for="role">Role (English)</label>
+      <input pInputText id="role" formControlName="role" placeholder="Senior Full Stack Developer" />
+    </div>
+
+    <div class="field">
+      <label for="roleFr">Role (Français)</label>
+      <input pInputText id="roleFr" formControlName="roleFr" placeholder="Développeuse Full Stack Senior" />
+    </div>
+
+    <div class="field">
+      <label for="company">Company</label>
+      <input pInputText id="company" formControlName="company" placeholder="Nova Labs" />
+    </div>
+
+    <div class="field">
+      <label for="location">Location</label>
+      <input pInputText id="location" formControlName="location" placeholder="Remote" />
+    </div>
+
+    <div class="field">
+      <label for="startDate">Start date</label>
+      <p-datepicker id="startDate" formControlName="startDate" view="month" dateFormat="mm/yy" [showIcon]="true" />
+    </div>
+
+    <div class="field">
+      <label for="endDate">End date (leave empty if current)</label>
+      <p-datepicker id="endDate" formControlName="endDate" view="month" dateFormat="mm/yy" [showIcon]="true" />
+    </div>
+
+    <div class="field field--full">
+      <label for="displayOrder">Display order</label>
+      <p-inputnumber id="displayOrder" formControlName="displayOrder" [showButtons]="true" />
+    </div>
+
+    <div class="field field--full">
+      <label for="description">Description (English)</label>
+      <textarea pTextarea id="description" formControlName="description" rows="4"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="descriptionFr">Description (Français)</label>
+      <textarea pTextarea id="descriptionFr" formControlName="descriptionFr" rows="4"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="achievements">Key achievements (English)</label>
+      <textarea pTextarea id="achievements" formControlName="achievements" rows="3"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="achievementsFr">Key achievements (Français)</label>
+      <textarea pTextarea id="achievementsFr" formControlName="achievementsFr" rows="3"></textarea>
+    </div>
+  </div>
+
+  <button pButton type="submit" label="Save" [loading]="saving()"></button>
+</form>

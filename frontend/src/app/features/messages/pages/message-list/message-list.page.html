@@ -1,0 +1,35 @@
+<app-page-header title="Messages" subtitle="Messages received through your contact form" />
+
+<div class="glass-panel message-list__table">
+  <p-table [value]="messages()" [loading]="loading()" [paginator]="true" [rows]="10" dataKey="id">
+    <ng-template #header>
+      <tr>
+        <th></th>
+        <th>From</th>
+        <th>Subject</th>
+        <th>Received</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-message>
+      <tr class="message-list__row" [class.message-list__row--unread]="!message.read" (click)="open(message)">
+        <td>
+          @if (!message.read) {
+            <p-tag value="New" severity="info" />
+          }
+        </td>
+        <td>{{ message.senderName }}</td>
+        <td>{{ message.subject || '(no subject)' }}</td>
+        <td>{{ message.createdAt | date: 'medium' }}</td>
+        <td class="message-list__actions">
+          <button pButton type="button" icon="pi pi-trash" severity="danger" [text]="true" (click)="confirmDelete(message); $event.stopPropagation()"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="5">No messages yet.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

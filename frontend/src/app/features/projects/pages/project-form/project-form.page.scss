@@ -1,0 +1,13 @@
+.form-panel {
+  max-width: 760px;
+}
+
+.project-form__featured {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+
+  label {
+    order: -1;
+  }
+}

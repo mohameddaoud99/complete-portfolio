@@ -1,0 +1,40 @@
+<section class="section container" appReveal>
+  <app-section-heading [title]="i18n.t('projects.title')" [subtitle]="i18n.t('projects.subtitle')" align="center" />
+
+  @if (projects().length > 0) {
+    @if (categories().length > 0) {
+      <div class="projects-filter">
+        <button
+          type="button"
+          class="projects-filter__chip"
+          [class.projects-filter__chip--active]="activeCategory() === null"
+          (click)="setCategory(null)"
+        >
+          {{ i18n.t('projects.filter.all') }}
+        </button>
+        @for (category of categories(); track category) {
+          <button
+            type="button"
+            class="projects-filter__chip"
+            [class.projects-filter__chip--active]="activeCategory() === category"
+            (click)="setCategory(category)"
+          >
+            {{ category }}
+          </button>
+        }
+      </div>
+    }
+
+    <div class="project-grid">
+      @for (project of filteredProjects(); track project.id) {
+        <app-project-card [project]="project" appReveal />
+      }
+    </div>
+  } @else {
+    <div class="project-grid">
+      @for (item of [1, 2, 3, 4]; track item) {
+        <app-skeleton height="20rem" radius="var(--radius-lg)" />
+      }
+    </div>
+  }
+</section>

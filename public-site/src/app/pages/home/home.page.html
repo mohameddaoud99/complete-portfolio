@@ -1,0 +1,139 @@
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__text" appReveal>
+      <span class="hero__greeting">{{ i18n.t('hero.greeting') }}</span>
+      <h1>
+        {{ profile()?.fullName }}<br />
+        <span class="gradient-text">{{ heroTitle() }}</span>
+      </h1>
+      <p class="hero__bio">{{ heroBio() }}</p>
+
+      <div class="hero__actions">
+        <a routerLink="/projects" class="btn btn--primary">
+          {{ i18n.t('hero.cta.projects') }}
+          <lucide-icon [img]="arrowIcon" [size]="16" />
+        </a>
+        <a routerLink="/contact" class="btn btn--ghost">{{ i18n.t('hero.cta.contact') }}</a>
+      </div>
+
+      <div class="hero__socials">
+        @if (profile()?.githubUrl) {
+          <a [href]="profile()!.githubUrl!" target="_blank" rel="noopener" aria-label="GitHub"><lucide-icon [img]="githubIcon" [size]="18" /></a>
+        }
+        @if (profile()?.linkedinUrl) {
+          <a [href]="profile()!.linkedinUrl!" target="_blank" rel="noopener" aria-label="LinkedIn"><lucide-icon [img]="linkedinIcon" [size]="18" /></a>
+        }
+        @if (profile()?.twitterUrl) {
+          <a [href]="profile()!.twitterUrl!" target="_blank" rel="noopener" aria-label="Twitter"><lucide-icon [img]="twitterIcon" [size]="18" /></a>
+        }
+        @if (profile()?.email) {
+          <a [href]="'mailto:' + profile()!.email" aria-label="Email"><lucide-icon [img]="mailIcon" [size]="18" /></a>
+        }
+      </div>
+    </div>
+
+    <div class="hero__portrait" appReveal>
+      <div class="hero__portrait-glow"></div>
+      @if (avatarUrl()) {
+        <img [src]="avatarUrl()" [alt]="profile()?.fullName" />
+      } @else {
+        <div class="hero__portrait-placeholder">{{ profile()?.fullName?.charAt(0) }}</div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="stats container" appReveal>
+  <div class="stats__item">
+    <span class="stats__value">{{ projects().length }}</span>
+    <span class="stats__label">{{ i18n.t('home.stats.projects') }}</span>
+  </div>
+  <div class="stats__item">
+    <span class="stats__value">{{ skills().length }}</span>
+    <span class="stats__label">{{ i18n.t('home.stats.skills') }}</span>
+  </div>
+  <div class="stats__item">
+    <span class="stats__value">{{ experienceCount() }}</span>
+    <span class="stats__label">{{ i18n.t('home.stats.experience') }}</span>
+  </div>
+  <div class="stats__item">
+    <span class="stats__value">{{ articles().length }}</span>
+    <span class="stats__label">{{ i18n.t('home.stats.articles') }}</span>
+  </div>
+</section>
+
+@if (featuredProjects().length > 0) {
+  <section class="section container" appReveal>
+    <app-section-heading [title]="i18n.t('home.featuredProjects.title')" [subtitle]="i18n.t('home.featuredProjects.subtitle')" />
+    <div class="project-grid">
+      @for (project of featuredProjects(); track project.id) {
+        <app-project-card [project]="project" />
+      }
+    </div>
+    <div class="section__footer">
+      <a routerLink="/projects" class="btn btn--ghost">{{ i18n.t('home.featuredProjects.viewAll') }}</a>
+    </div>
+  </section>
+}
+
+@if (topSkills().length > 0) {
+  <section class="section section--muted" appReveal>
+    <div class="container">
+      <app-section-heading [title]="i18n.t('home.skills.title')" [subtitle]="i18n.t('home.skills.subtitle')" />
+      <div class="skills-preview">
+        @for (skill of topSkills(); track skill.id) {
+          <span class="skills-preview__chip">{{ skill.name }}</span>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+@if (latestArticles().length > 0) {
+  <section class="section container" appReveal>
+    <app-section-heading [title]="i18n.t('home.articles.title')" [subtitle]="i18n.t('home.articles.subtitle')" />
+    <div class="article-grid">
+      @for (article of latestArticles(); track article.id) {
+        <app-article-card [article]="article" />
+      }
+    </div>
+    <div class="section__footer">
+      <a routerLink="/articles" class="btn btn--ghost">{{ i18n.t('home.articles.viewAll') }}</a>
+    </div>
+  </section>
+}
+
+@if (testimonials().length > 0) {
+  <section class="section section--muted" appReveal>
+    <div class="container">
+      <app-section-heading [title]="i18n.t('home.testimonials.title')" />
+      <div class="testimonial-grid">
+        @for (testimonial of testimonials(); track testimonial.id) {
+          <blockquote class="testimonial-card glass-panel">
+            <p>&ldquo;{{ i18n.pick(testimonial.quote, testimonial.quoteFr) }}&rdquo;</p>
+            <footer>
+              <strong>{{ testimonial.authorName }}</strong>
+              <span>
+                {{ i18n.pick(testimonial.authorRole, testimonial.authorRoleFr) }}
+                @if (testimonial.authorCompany) {
+                  &middot; {{ testimonial.authorCompany }}
+                }
+              </span>
+            </footer>
+          </blockquote>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<section class="cta container" appReveal>
+  <div class="cta__panel glass-panel">
+    <h2>{{ i18n.t('home.cta.title') }}</h2>
+    <p>{{ i18n.t('home.cta.subtitle') }}</p>
+    <a routerLink="/contact" class="btn btn--primary">
+      {{ i18n.t('home.cta.button') }}
+      <lucide-icon [img]="arrowIcon" [size]="16" />
+    </a>
+  </div>
+</section>

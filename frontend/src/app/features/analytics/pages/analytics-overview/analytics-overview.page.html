@@ -1,0 +1,33 @@
+<app-page-header title="Analytics" subtitle="Demo traffic data — connect a real data source once the public portfolio is live" />
+
+<div class="analytics-overview__stats">
+  <app-stat-card [icon]="eyeIcon" title="Page Views (7d)" [value]="1103" [trend]="9" description="Total page views this week" />
+  <app-stat-card [icon]="usersIcon" title="Unique Visitors (7d)" [value]="745" [trend]="6" description="Distinct visitors this week" />
+  <app-stat-card [icon]="clickIcon" title="Avg. Session" [value]="'2m 34s'" [trend]="3" description="Average time on site" />
+  <app-stat-card [icon]="trendIcon" title="Bounce Rate" [value]="'38%'" [trend]="-4" description="Single-page sessions" />
+</div>
+
+<div class="analytics-overview__charts">
+  <div class="glass-panel analytics-overview__traffic">
+    <h3>Traffic overview</h3>
+    <p class="analytics-overview__subtitle">Page views and unique visitors over the last 7 days</p>
+    <div class="analytics-overview__canvas">
+      <p-chart type="line" [data]="trafficChartData" [options]="trafficChartOptions" />
+    </div>
+  </div>
+
+  <div class="glass-panel analytics-overview__sources">
+    <h3>Traffic sources</h3>
+    <div class="analytics-overview__canvas">
+      <p-chart type="doughnut" [data]="sourcesChartData" [options]="sourcesChartOptions" />
+    </div>
+  </div>
+
+  <div class="glass-panel analytics-overview__top-content">
+    <h3>Top content</h3>
+    <p class="analytics-overview__subtitle">Most viewed projects and articles</p>
+    <div class="analytics-overview__canvas">
+      <p-chart type="bar" [data]="topContentChartData" [options]="topContentChartOptions" />
+    </div>
+  </div>
+</div>

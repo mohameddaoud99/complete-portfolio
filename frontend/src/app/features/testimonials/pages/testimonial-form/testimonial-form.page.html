@@ -1,0 +1,49 @@
+<app-page-header [title]="isEditMode ? 'Edit Testimonial' : 'Add Testimonial'" />
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
+  <app-image-upload [(imageUrl)]="avatarUrl" label="Upload avatar" />
+
+  <div class="form-grid">
+    <div class="field">
+      <label for="authorName">Author name</label>
+      <input pInputText id="authorName" formControlName="authorName" />
+    </div>
+
+    <div class="field">
+      <label for="authorCompany">Company</label>
+      <input pInputText id="authorCompany" formControlName="authorCompany" />
+    </div>
+
+    <div class="field">
+      <label for="authorRole">Role (English)</label>
+      <input pInputText id="authorRole" formControlName="authorRole" />
+    </div>
+
+    <div class="field">
+      <label for="authorRoleFr">Role (Français)</label>
+      <input pInputText id="authorRoleFr" formControlName="authorRoleFr" />
+    </div>
+
+    <div class="field field--full">
+      <label for="quote">Quote (English)</label>
+      <textarea pTextarea id="quote" formControlName="quote" rows="3"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="quoteFr">Quote (Français)</label>
+      <textarea pTextarea id="quoteFr" formControlName="quoteFr" rows="3"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="displayOrder">Display order</label>
+      <p-inputnumber id="displayOrder" formControlName="displayOrder" [showButtons]="true" />
+    </div>
+
+    <div class="field testimonial-form__published">
+      <label for="published">Published</label>
+      <p-toggleswitch id="published" formControlName="published" />
+    </div>
+  </div>
+
+  <button pButton type="submit" label="Save" [loading]="saving()"></button>
+</form>

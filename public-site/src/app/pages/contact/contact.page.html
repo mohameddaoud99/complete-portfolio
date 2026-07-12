@@ -1,0 +1,75 @@
+<section class="section container" appReveal>
+  <app-section-heading [title]="i18n.t('contact.title')" [subtitle]="i18n.t('contact.subtitle')" align="center" />
+
+  <div class="contact-layout">
+    <form class="contact-form glass-panel" [formGroup]="form" (ngSubmit)="submit()" appReveal>
+      <div class="contact-form__field">
+        <label for="senderName">{{ i18n.t('contact.form.name') }}</label>
+        <input id="senderName" type="text" formControlName="senderName" />
+      </div>
+
+      <div class="contact-form__field">
+        <label for="senderEmail">{{ i18n.t('contact.form.email') }}</label>
+        <input id="senderEmail" type="email" formControlName="senderEmail" />
+      </div>
+
+      <div class="contact-form__field">
+        <label for="subject">{{ i18n.t('contact.form.subject') }}</label>
+        <input id="subject" type="text" formControlName="subject" />
+      </div>
+
+      <div class="contact-form__field">
+        <label for="body">{{ i18n.t('contact.form.message') }}</label>
+        <textarea id="body" rows="5" formControlName="body"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--primary" [disabled]="status() === 'submitting'">
+        <lucide-icon [img]="sendIcon" [size]="16" />
+        {{ i18n.t('contact.form.submit') }}
+      </button>
+
+      @if (status() === 'success') {
+        <p class="contact-form__message contact-form__message--success">{{ i18n.t('contact.form.success') }}</p>
+      }
+      @if (status() === 'error') {
+        <p class="contact-form__message contact-form__message--error">{{ i18n.t('contact.form.error') }}</p>
+      }
+    </form>
+
+    <div class="contact-info glass-panel" appReveal>
+      <h3>{{ i18n.t('contact.info.title') }}</h3>
+
+      @if (profile()?.email) {
+        <a [href]="'mailto:' + profile()!.email" class="contact-info__row">
+          <lucide-icon [img]="emailIcon" [size]="18" />
+          {{ profile()!.email }}
+        </a>
+      }
+      @if (profile()?.location) {
+        <div class="contact-info__row">
+          <lucide-icon [img]="locationIcon" [size]="18" />
+          {{ profile()!.location }}
+        </div>
+      }
+      @if (profile()?.resumeUrl) {
+        <a [href]="profile()!.resumeUrl!" target="_blank" rel="noopener" class="contact-info__row">
+          <lucide-icon [img]="downloadIcon" [size]="18" />
+          {{ i18n.t('about.resume') }}
+        </a>
+      }
+
+      @if (socialLinks().length > 0) {
+        <div class="contact-info__socials">
+          <span>{{ i18n.t('contact.info.social') }}</span>
+          <div class="contact-info__social-icons">
+            @for (link of socialLinks(); track link.label) {
+              <a [href]="link.url" target="_blank" rel="noopener" [attr.aria-label]="link.label">
+                <lucide-icon [img]="link.icon" [size]="18" />
+              </a>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

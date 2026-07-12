@@ -1,0 +1,41 @@
+<header class="navbar glass-panel">
+  <div class="container navbar__inner">
+    <a routerLink="/" class="navbar__brand" (click)="closeMobile()">
+      <span class="navbar__logo">MTD</span>
+    </a>
+
+    <nav class="navbar__links" [class.navbar__links--open]="mobileOpen()">
+      @for (link of navLinks; track link.path) {
+      <a [routerLink]="link.path" routerLinkActive="navbar__link--active"
+        [routerLinkActiveOptions]="{ exact: link.path === '/' }" class="navbar__link" (click)="closeMobile()">
+        {{ i18n.t(link.labelKey) }}
+      </a>
+      }
+    </nav>
+
+    <div class="navbar__actions">
+      <button type="button" class="navbar__icon-btn" (click)="toggleLang()" [attr.aria-label]="'Switch language'">
+        <lucide-icon [img]="langIcon" [size]="18" />
+        <span class="navbar__lang-label">{{ i18n.lang() === 'en' ? 'FR' : 'EN' }}</span>
+      </button>
+
+      <button type="button" class="navbar__icon-btn" (click)="toggleTheme()" [attr.aria-label]="'Toggle theme'">
+        <lucide-icon [img]="themeService.theme() === 'dark' ? sunIcon : moonIcon" [size]="18" />
+      </button>
+
+      <button type="button" class="navbar__icon-btn navbar__mobile-toggle" (click)="toggleMobile()"
+        [attr.aria-label]="'Toggle menu'">
+        <lucide-icon [img]="mobileOpen() ? closeIcon : menuIcon" [size]="20" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="navbar__mobile-panel" [class.navbar__mobile-panel--open]="mobileOpen()">
+  @for (link of navLinks; track link.path) {
+  <a [routerLink]="link.path" routerLinkActive="navbar__link--active"
+    [routerLinkActiveOptions]="{ exact: link.path === '/' }" class="navbar__link" (click)="closeMobile()">
+    {{ i18n.t(link.labelKey) }}
+  </a>
+  }
+</nav>

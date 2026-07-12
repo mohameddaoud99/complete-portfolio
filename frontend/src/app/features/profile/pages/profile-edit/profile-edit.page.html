@@ -1,0 +1,84 @@
+<app-page-header title="Profile" subtitle="Manage your public bio and contact details" />
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="profile-form glass-panel">
+  <app-image-upload [(imageUrl)]="avatarUrl" label="Upload avatar" />
+
+  <div class="profile-form__grid">
+    <div class="field">
+      <label for="fullName">Full name</label>
+      <input pInputText id="fullName" formControlName="fullName" />
+    </div>
+
+    <div class="field">
+      <label for="title">Title (English)</label>
+      <input pInputText id="title" formControlName="title" placeholder="Full Stack Developer" />
+    </div>
+
+    <div class="field">
+      <label for="titleFr">Title (Français)</label>
+      <input pInputText id="titleFr" formControlName="titleFr" placeholder="Développeur Full Stack" />
+    </div>
+
+    <div class="field field--full">
+      <label for="bio">Bio (English)</label>
+      <textarea pTextarea id="bio" formControlName="bio" rows="4"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="bioFr">Bio (Français)</label>
+      <textarea pTextarea id="bioFr" formControlName="bioFr" rows="4"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input pInputText id="email" formControlName="email" />
+    </div>
+
+    <div class="field">
+      <label for="phone">Phone</label>
+      <input pInputText id="phone" formControlName="phone" />
+    </div>
+
+    <div class="field">
+      <label for="location">Location</label>
+      <input pInputText id="location" formControlName="location" />
+    </div>
+
+    <div class="field">
+      <label for="githubUrl">GitHub URL</label>
+      <input pInputText id="githubUrl" formControlName="githubUrl" />
+    </div>
+
+    <div class="field">
+      <label for="linkedinUrl">LinkedIn URL</label>
+      <input pInputText id="linkedinUrl" formControlName="linkedinUrl" />
+    </div>
+
+    <div class="field">
+      <label for="twitterUrl">Twitter URL</label>
+      <input pInputText id="twitterUrl" formControlName="twitterUrl" />
+    </div>
+
+    <div class="field">
+      <label for="websiteUrl">Website URL</label>
+      <input pInputText id="websiteUrl" formControlName="websiteUrl" />
+    </div>
+
+    <div class="field">
+      <label for="resumeUrl">Resume URL</label>
+      <input pInputText id="resumeUrl" formControlName="resumeUrl" />
+    </div>
+
+    <div class="field field--full">
+      <label for="seoTitle">SEO title</label>
+      <input pInputText id="seoTitle" formControlName="seoTitle" placeholder="Shown in browser tabs and search results" />
+    </div>
+
+    <div class="field field--full">
+      <label for="seoDescription">SEO description</label>
+      <textarea pTextarea id="seoDescription" formControlName="seoDescription" rows="2"></textarea>
+    </div>
+  </div>
+
+  <button pButton type="submit" label="Save changes" [loading]="saving()"></button>
+</form>

@@ -1,0 +1,45 @@
+.analytics-overview__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.analytics-overview__charts {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+}
+
+.analytics-overview__traffic,
+.analytics-overview__sources,
+.analytics-overview__top-content {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+
+  h3 {
+    margin: 0 0 0.15rem;
+    font-size: 1.05rem;
+  }
+}
+
+.analytics-overview__top-content {
+  grid-column: 1 / -1;
+}
+
+.analytics-overview__subtitle {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.analytics-overview__canvas {
+  height: 260px;
+}
+
+@media (max-width: 992px) {
+  .analytics-overview__charts {
+    grid-template-columns: 1fr;
+  }
+}

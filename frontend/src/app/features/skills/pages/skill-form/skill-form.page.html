@@ -1,0 +1,37 @@
+<app-page-header [title]="isEditMode ? 'Edit Skill' : 'Add Skill'" />
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
+  <div class="form-grid">
+    <div class="field">
+      <label for="name">Name</label>
+      <input pInputText id="name" formControlName="name" placeholder="Angular" />
+    </div>
+
+    <div class="field">
+      <label for="category">Category</label>
+      <p-select id="category" formControlName="category" [options]="categoryOptions" [editable]="true" placeholder="Select or type a category" />
+    </div>
+
+    <div class="field">
+      <label>Proficiency</label>
+      <p-rating formControlName="proficiency" [stars]="5" />
+    </div>
+
+    <div class="field">
+      <label for="icon">Icon (Lucide icon name)</label>
+      <input pInputText id="icon" formControlName="icon" placeholder="e.g. Atom, Coffee, Database" />
+    </div>
+
+    <div class="field">
+      <label for="yearsExperience">Years of experience</label>
+      <p-inputnumber id="yearsExperience" formControlName="yearsExperience" [showButtons]="true" [min]="0" />
+    </div>
+
+    <div class="field">
+      <label for="displayOrder">Display order</label>
+      <p-inputnumber id="displayOrder" formControlName="displayOrder" [showButtons]="true" />
+    </div>
+  </div>
+
+  <button pButton type="submit" label="Save" [loading]="saving()"></button>
+</form>

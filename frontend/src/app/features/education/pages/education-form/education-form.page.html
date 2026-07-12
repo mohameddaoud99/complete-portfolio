@@ -1,0 +1,52 @@
+<app-page-header [title]="isEditMode ? 'Edit Education' : 'Add Education'" />
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
+  <div class="form-grid">
+    <div class="field">
+      <label for="institution">Institution</label>
+      <input pInputText id="institution" formControlName="institution" />
+    </div>
+
+    <div class="field">
+      <label for="field">Field of study</label>
+      <input pInputText id="field" formControlName="field" placeholder="Computer Science" />
+    </div>
+
+    <div class="field">
+      <label for="degree">Degree (English)</label>
+      <input pInputText id="degree" formControlName="degree" />
+    </div>
+
+    <div class="field">
+      <label for="degreeFr">Degree (Français)</label>
+      <input pInputText id="degreeFr" formControlName="degreeFr" />
+    </div>
+
+    <div class="field">
+      <label for="startDate">Start date</label>
+      <p-datepicker id="startDate" formControlName="startDate" view="month" dateFormat="mm/yy" [showIcon]="true" />
+    </div>
+
+    <div class="field">
+      <label for="endDate">End date</label>
+      <p-datepicker id="endDate" formControlName="endDate" view="month" dateFormat="mm/yy" [showIcon]="true" />
+    </div>
+
+    <div class="field">
+      <label for="displayOrder">Display order</label>
+      <p-inputnumber id="displayOrder" formControlName="displayOrder" [showButtons]="true" />
+    </div>
+
+    <div class="field field--full">
+      <label for="description">Description (English)</label>
+      <textarea pTextarea id="description" formControlName="description" rows="3"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="descriptionFr">Description (Français)</label>
+      <textarea pTextarea id="descriptionFr" formControlName="descriptionFr" rows="3"></textarea>
+    </div>
+  </div>
+
+  <button pButton type="submit" label="Save" [loading]="saving()"></button>
+</form>

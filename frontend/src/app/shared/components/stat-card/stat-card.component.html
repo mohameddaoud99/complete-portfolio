@@ -1,0 +1,20 @@
+<div class="stat-card glass-panel">
+  <div class="stat-card__icon">
+    <lucide-icon [img]="icon()" [size]="22" />
+  </div>
+
+  <div class="stat-card__body">
+    <span class="stat-card__title">{{ title() }}</span>
+    <span class="stat-card__value">{{ value() }}</span>
+
+    <div class="stat-card__footer">
+      @if (trend() !== null) {
+        <span class="stat-card__trend" [class.stat-card__trend--negative]="!isPositiveTrend()">
+          <lucide-icon [img]="trendIcon()" [size]="14" />
+          {{ trend() }}%
+        </span>
+      }
+      <span class="stat-card__description">{{ description() }}</span>
+    </div>
+  </div>
+</div>

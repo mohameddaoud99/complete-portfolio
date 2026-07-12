@@ -1,0 +1,26 @@
+<app-page-header title="Media" subtitle="Upload and manage images used across your portfolio">
+  <label class="media-library__upload">
+    <input type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+    <span pButton type="button" [label]="uploading() ? 'Uploading...' : 'Upload file'" icon="pi pi-upload" [loading]="uploading()"></span>
+  </label>
+</app-page-header>
+
+<div class="media-library__grid">
+  @for (file of files(); track file.id) {
+    <div class="media-library__item glass-panel">
+      @if (isImage(file)) {
+        <img [src]="resolveUrl(file)" [alt]="file.originalFileName" />
+      } @else {
+        <div class="media-library__file-icon"><i class="pi pi-file"></i></div>
+      }
+      <div class="media-library__meta">
+        <span class="media-library__name">{{ file.originalFileName }}</span>
+        <button pButton type="button" icon="pi pi-trash" severity="danger" [text]="true" (click)="confirmDelete(file)"></button>
+      </div>
+    </div>
+  } @empty {
+    @if (!loading()) {
+      <p class="media-library__empty">No files uploaded yet.</p>
+    }
+  }
+</div>

@@ -1,0 +1,47 @@
+<section class="section container" appReveal>
+  <app-section-heading [title]="i18n.t('experience.title')" [subtitle]="i18n.t('experience.subtitle')" align="center" />
+
+  @if (experiences().length > 0) {
+    <div class="timeline">
+      @for (item of experiences(); track item.id) {
+        <div class="timeline__item" appReveal>
+          <div class="timeline__marker"></div>
+          <div class="timeline__content glass-panel">
+            <span class="timeline__period">
+              {{ item.startDate | date: 'MMM y' }} — {{ item.endDate ? (item.endDate | date: 'MMM y') : i18n.t('experience.present') }}
+            </span>
+            <h3>{{ i18n.pick(item.role, item.roleFr) }}</h3>
+            <div class="timeline__meta">
+              <span class="timeline__company">{{ item.company }}</span>
+              @if (item.location) {
+                <span class="timeline__location">
+                  <lucide-icon [img]="locationIcon" [size]="14" />
+                  {{ item.location }}
+                </span>
+              }
+            </div>
+            @if (i18n.pick(item.description, item.descriptionFr)) {
+              <p class="timeline__description">{{ i18n.pick(item.description, item.descriptionFr) }}</p>
+            }
+            @if (achievementList(item).length > 0) {
+              <div class="timeline__achievements">
+                <span class="timeline__achievements-title">{{ i18n.t('experience.achievements') }}</span>
+                <ul>
+                  @for (achievement of achievementList(item); track achievement) {
+                    <li>{{ achievement }}</li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="timeline">
+      @for (item of [1, 2, 3]; track item) {
+        <app-skeleton height="10rem" radius="var(--radius-lg)" />
+      }
+    </div>
+  }
+</section>

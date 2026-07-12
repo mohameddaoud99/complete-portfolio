@@ -1,0 +1,122 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: var(--topbar-height);
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.topbar__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  position: relative;
+
+  &:hover {
+    background: var(--surface-border);
+    color: var(--text-primary);
+  }
+}
+
+.topbar__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  max-width: 420px;
+  padding: 0 0.85rem;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--surface-border);
+
+  input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+  }
+}
+
+.topbar__search-icon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.topbar__bell {
+  position: relative;
+}
+
+.topbar__badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.topbar__profile {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  padding: 0;
+}
+
+.notifications-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 300px;
+
+  h4 {
+    margin: 0 0 0.25rem;
+  }
+}
+
+.notification-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 0.6rem 0.75rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+
+  &:hover {
+    background: var(--surface-border);
+  }
+
+  &--unread .notification-item__title {
+    font-weight: 700;
+  }
+}
+
+.notification-item__title {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.notification-item__description {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,24 @@
+<aside class="sidebar" [class.collapsed]="collapsed()">
+  <div class="sidebar__brand">
+    <span class="sidebar__logo">P</span>
+    @if (!collapsed()) {
+      <span class="sidebar__brand-name">Portfolio Admin</span>
+    }
+  </div>
+
+  <nav class="sidebar__nav">
+    @for (item of navItems; track item.route) {
+      <a
+        class="sidebar__link"
+        [routerLink]="item.route"
+        routerLinkActive="sidebar__link--active"
+        (click)="navigate.emit()"
+      >
+        <lucide-icon [img]="item.icon" [size]="20" class="sidebar__icon" />
+        @if (!collapsed()) {
+          <span class="sidebar__label">{{ item.label }}</span>
+        }
+      </a>
+    }
+  </nav>
+</aside>

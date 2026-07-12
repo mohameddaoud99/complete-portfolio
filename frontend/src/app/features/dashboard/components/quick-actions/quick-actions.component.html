@@ -1,0 +1,8 @@
+<div class="quick-actions">
+  @for (action of actions; track action.label) {
+    <button type="button" class="quick-actions__item glass-panel" (click)="go(action.route)">
+      <lucide-icon [img]="action.icon" [size]="20" />
+      <span>{{ action.label }}</span>
+    </button>
+  }
+</div>

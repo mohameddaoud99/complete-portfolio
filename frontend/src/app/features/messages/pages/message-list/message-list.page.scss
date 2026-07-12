@@ -1,0 +1,18 @@
+.message-list__table {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  overflow: hidden;
+}
+
+.message-list__row {
+  cursor: pointer;
+
+  &--unread {
+    font-weight: 600;
+  }
+}
+
+.message-list__actions {
+  display: flex;
+  justify-content: flex-end;
+}

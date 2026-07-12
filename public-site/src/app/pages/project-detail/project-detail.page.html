@@ -1,0 +1,66 @@
+@if (project(); as project) {
+  <section class="project-detail container" appReveal>
+    <a routerLink="/projects" class="project-detail__back">
+      <lucide-icon [img]="backIcon" [size]="16" />
+      {{ i18n.t('projects.backToProjects') }}
+    </a>
+
+    <div class="project-detail__header">
+      @if (project.category) {
+        <span class="project-detail__category">{{ project.category }}</span>
+      }
+      <h1>{{ project.title }}</h1>
+      @if (summary()) {
+        <p class="project-detail__summary">{{ summary() }}</p>
+      }
+
+      <div class="project-detail__links">
+        @if (project.liveUrl) {
+          <a [href]="project.liveUrl" target="_blank" rel="noopener" class="btn btn--primary">
+            <lucide-icon [img]="liveIcon" [size]="16" />
+            {{ i18n.t('projects.liveDemo') }}
+          </a>
+        }
+        @if (project.repoUrl) {
+          <a [href]="project.repoUrl" target="_blank" rel="noopener" class="btn btn--ghost">
+            <lucide-icon [img]="repoIcon" [size]="16" />
+            {{ i18n.t('projects.viewCode') }}
+          </a>
+        }
+      </div>
+    </div>
+
+    @if (coverUrl()) {
+      <div class="project-detail__cover">
+        <img [src]="coverUrl()!" [alt]="project.title" />
+      </div>
+    }
+
+    <div class="project-detail__body">
+      @if (description()) {
+        <p class="project-detail__description">{{ description() }}</p>
+      }
+
+      @if (techList().length > 0) {
+        <div class="project-detail__tech">
+          @for (tech of techList(); track tech) {
+            <span class="project-detail__tech-tag">{{ tech }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    @if (screenshotUrls().length > 0) {
+      <div class="project-detail__gallery">
+        @for (url of screenshotUrls(); track url) {
+          <img [src]="url!" [alt]="project.title" loading="lazy" />
+        }
+      </div>
+    }
+  </section>
+} @else if (notFound()) {
+  <section class="section container">
+    <p>{{ i18n.t('common.empty') }}</p>
+    <a routerLink="/projects" class="btn btn--ghost">{{ i18n.t('projects.backToProjects') }}</a>
+  </section>
+}

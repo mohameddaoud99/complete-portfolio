@@ -1,0 +1,103 @@
+<section class="about-hero container" appReveal>
+  <div class="about-hero__portrait">
+    @if (avatarUrl()) {
+      <img [src]="avatarUrl()" [alt]="profile()?.fullName" />
+    } @else {
+      <div class="about-hero__placeholder">{{ profile()?.fullName?.charAt(0) }}</div>
+    }
+  </div>
+  <div class="about-hero__text">
+    <span class="about-hero__eyebrow">{{ i18n.t('about.title') }}</span>
+    <h1>{{ i18n.t('about.subtitle') }}</h1>
+    <p>{{ bio() }}</p>
+    @if (profile()?.resumeUrl) {
+      <a [href]="profile()!.resumeUrl!" target="_blank" rel="noopener" class="btn btn--primary">
+        <lucide-icon [img]="downloadIcon" [size]="16" />
+        {{ i18n.t('about.resume') }}
+      </a>
+    }
+  </div>
+</section>
+
+<section class="section container" appReveal>
+  <app-section-heading [title]="i18n.t('about.values.title')" align="left" />
+  <div class="values-grid">
+    <div class="value-card glass-panel">
+      <lucide-icon [img]="qualityIcon" [size]="24" />
+      <h3>{{ i18n.t('about.values.quality') }}</h3>
+      <p>{{ i18n.t('about.values.qualityDesc') }}</p>
+    </div>
+    <div class="value-card glass-panel">
+      <lucide-icon [img]="collaborationIcon" [size]="24" />
+      <h3>{{ i18n.t('about.values.collaboration') }}</h3>
+      <p>{{ i18n.t('about.values.collaborationDesc') }}</p>
+    </div>
+    <div class="value-card glass-panel">
+      <lucide-icon [img]="growthIcon" [size]="24" />
+      <h3>{{ i18n.t('about.values.growth') }}</h3>
+      <p>{{ i18n.t('about.values.growthDesc') }}</p>
+    </div>
+  </div>
+</section>
+
+@if (experiences().length > 0) {
+  <section class="section section--muted" appReveal>
+    <div class="container">
+      <app-section-heading [title]="i18n.t('about.journey.title')" align="left" />
+      <div class="credential-list">
+        @for (item of experiences(); track item.id) {
+          <div class="credential-item glass-panel">
+            <lucide-icon [img]="collaborationIcon" [size]="20" />
+            <div>
+              <h4>{{ i18n.pick(item.role, item.roleFr) }}<span> — {{ item.company }}</span></h4>
+              <p class="credential-item__period">
+                {{ item.startDate | date: 'MMM y' }} - {{ item.endDate ? (item.endDate | date: 'MMM y') : i18n.t('experience.present') }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+@if (education().length > 0) {
+  <section class="section container" appReveal>
+    <app-section-heading [title]="i18n.t('about.education.title')" align="left" />
+    <div class="credential-list">
+      @for (item of education(); track item.id) {
+        <div class="credential-item glass-panel">
+          <lucide-icon [img]="educationIcon" [size]="20" />
+          <div>
+            <h4>{{ i18n.pick(item.degree, item.degreeFr) }}<span> — {{ item.institution }}</span></h4>
+            <p class="credential-item__period">
+              {{ item.startDate | date: 'y' }} - {{ item.endDate ? (item.endDate | date: 'y') : '' }}
+            </p>
+            @if (i18n.pick(item.description, item.descriptionFr)) {
+              <p>{{ i18n.pick(item.description, item.descriptionFr) }}</p>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+}
+
+@if (certifications().length > 0) {
+  <section class="section section--muted" appReveal>
+   <div class="container">
+    <app-section-heading [title]="i18n.t('about.certifications.title')" align="left" />
+    <div class="credential-list">
+      @for (item of certifications(); track item.id) {
+        <div class="credential-item glass-panel">
+          <lucide-icon [img]="certificationIcon" [size]="20" />
+          <div>
+            <h4>{{ item.name }}<span> — {{ item.issuer }}</span></h4>
+            <p class="credential-item__period">{{ item.issueDate | date: 'MMM y' }}</p>
+          </div>
+        </div>
+      }
+    </div>
+   </div>
+  </section>
+}

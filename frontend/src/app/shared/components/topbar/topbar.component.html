@@ -1,0 +1,44 @@
+<header class="topbar glass-panel">
+  <button class="topbar__icon-btn topbar__menu-toggle" type="button" (click)="toggleSidebar.emit()">
+    <lucide-icon [img]="menuIcon" [size]="20" />
+  </button>
+
+  <div class="topbar__search">
+    <lucide-icon [img]="searchIcon" [size]="18" class="topbar__search-icon" />
+    <input type="text" placeholder="Search projects, articles, skills..." />
+  </div>
+
+  <div class="topbar__actions">
+    <p-select [options]="languages" optionLabel="label" [ngModel]="currentLanguage()"
+      (ngModelChange)="onLanguageChange($event)" styleClass="topbar__language-select" />
+
+    <button class="topbar__icon-btn" type="button" (click)="toggleTheme()">
+      <lucide-icon [img]="theme() === 'dark' ? sunIcon : moonIcon" [size]="20" />
+    </button>
+
+    <button class="topbar__icon-btn topbar__bell" type="button" (click)="notifPopover.toggle($event)">
+      <lucide-icon [img]="bellIcon" [size]="20" />
+      @if (unreadCount() > 0) {
+      <p-badge [value]="unreadCount().toString()" severity="danger" class="topbar__badge" />
+      }
+    </button>
+
+    <p-popover #notifPopover>
+      <div class="notifications-panel">
+        <h4>Notifications</h4>
+        @for (notification of notifications(); track notification.id) {
+        <button type="button" class="notification-item" [class.notification-item--unread]="!notification.read"
+          (click)="markNotificationRead(notification)">
+          <span class="notification-item__title">{{ notification.title }}</span>
+          <span class="notification-item__description">{{ notification.description }}</span>
+        </button>
+        }
+      </div>
+    </p-popover>
+
+    <button class="topbar__profile" type="button" (click)="profileMenu.toggle($event)">
+      <p-avatar [label]="(currentUser()?.username?.charAt(0) ?? 'A') | uppercase" shape="circle" />
+    </button>
+    <p-menu #profileMenu [model]="profileMenuItems" [popup]="true" />
+  </div>
+</header>

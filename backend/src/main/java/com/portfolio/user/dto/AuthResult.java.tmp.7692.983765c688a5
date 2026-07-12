@@ -1,0 +1,4 @@
+package com.portfolio.user.dto;
+
+public record AuthResult(String accessToken, String refreshToken, long expiresInSeconds, UserProfileDto user) {
+}

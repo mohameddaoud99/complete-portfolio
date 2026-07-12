@@ -1,0 +1,34 @@
+<app-page-header title="Certifications" subtitle="Manage your professional certifications">
+  <a pButton routerLink="/certifications/new" icon="pi pi-plus" label="Add Certification"></a>
+</app-page-header>
+
+<div class="glass-panel certification-list__table">
+  <p-table [value]="items()" [loading]="loading()" [paginator]="true" [rows]="10" dataKey="id">
+    <ng-template #header>
+      <tr>
+        <th>Name</th>
+        <th>Issuer</th>
+        <th>Issued</th>
+        <th>Expires</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-item>
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.issuer }}</td>
+        <td>{{ item.issueDate | date: 'MMM y' }}</td>
+        <td>{{ item.expiryDate ? (item.expiryDate | date: 'MMM y') : 'No expiry' }}</td>
+        <td class="certification-list__actions">
+          <button pButton type="button" icon="pi pi-pencil" [text]="true" (click)="edit(item)"></button>
+          <button pButton type="button" icon="pi pi-trash" severity="danger" [text]="true" (click)="confirmDelete(item)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="5">No certifications yet. Click "Add Certification" to create one.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

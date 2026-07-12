@@ -1,0 +1,23 @@
+<a [routerLink]="['/articles', article().slug]" class="article-card glass-panel">
+  <div class="article-card__media">
+    @if (coverUrl()) {
+      <img [src]="coverUrl()" [alt]="title()" loading="lazy" />
+    } @else {
+      <div class="article-card__placeholder">{{ title().charAt(0) }}</div>
+    }
+  </div>
+
+  <div class="article-card__body">
+    @if (article().category) {
+      <span class="article-card__category">{{ article().category }}</span>
+    }
+    <h3>{{ title() }}</h3>
+    <p>{{ excerpt() }}</p>
+
+    <div class="article-card__meta">
+      <span>{{ article().publishedAt | date: 'MMM d, y' }}</span>
+      <span>&middot;</span>
+      <span>{{ readTime() }} {{ i18n.t('articles.readTime') }}</span>
+    </div>
+  </div>
+</a>

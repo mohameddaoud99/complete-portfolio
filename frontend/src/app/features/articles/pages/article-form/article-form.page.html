@@ -1,0 +1,59 @@
+<app-page-header [title]="isEditMode ? 'Edit Article' : 'Create Article'" />
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
+  <app-image-upload [(imageUrl)]="coverImageUrl" label="Upload cover image" />
+
+  <div class="form-grid">
+    <div class="field field--full">
+      <label for="title">Title (English)</label>
+      <input pInputText id="title" formControlName="title" />
+    </div>
+
+    <div class="field field--full">
+      <label for="titleFr">Title (Français)</label>
+      <input pInputText id="titleFr" formControlName="titleFr" />
+    </div>
+
+    <div class="field field--full">
+      <label for="excerpt">Excerpt (English)</label>
+      <textarea pTextarea id="excerpt" formControlName="excerpt" rows="2"></textarea>
+    </div>
+
+    <div class="field field--full">
+      <label for="excerptFr">Excerpt (Français)</label>
+      <textarea pTextarea id="excerptFr" formControlName="excerptFr" rows="2"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="category">Category</label>
+      <input pInputText id="category" formControlName="category" placeholder="Backend, Frontend, DevOps..." />
+    </div>
+
+    <div class="field">
+      <label for="tags">Tags (comma-separated)</label>
+      <input pInputText id="tags" formControlName="tags" placeholder="Spring Boot, Security, JWT" />
+    </div>
+
+    <div class="field field--full">
+      <label for="content">Content (English)</label>
+      <p-editor formControlName="contentHtml" [style]="{ height: '280px' }" />
+    </div>
+
+    <div class="field field--full">
+      <label for="contentFr">Content (Français)</label>
+      <p-editor formControlName="contentHtmlFr" [style]="{ height: '280px' }" />
+    </div>
+
+    <div class="field article-form__toggle">
+      <label for="featured">Featured</label>
+      <p-toggleswitch id="featured" formControlName="featured" />
+    </div>
+
+    <div class="field article-form__toggle">
+      <label for="published">Published</label>
+      <p-toggleswitch id="published" formControlName="published" />
+    </div>
+  </div>
+
+  <button pButton type="submit" label="Save" [loading]="saving()"></button>
+</form>

@@ -1,0 +1,9 @@
+@if (message(); as msg) {
+  <app-page-header [title]="msg.subject || '(no subject)'" [subtitle]="'From ' + msg.senderName + ' <' + msg.senderEmail + '>'">
+    <button pButton type="button" icon="pi pi-trash" severity="danger" label="Delete" (click)="confirmDelete()"></button>
+  </app-page-header>
+
+  <div class="glass-panel message-detail__body">
+    <p>{{ msg.body }}</p>
+  </div>
+}

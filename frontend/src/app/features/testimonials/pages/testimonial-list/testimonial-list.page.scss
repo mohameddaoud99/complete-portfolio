@@ -1,0 +1,10 @@
+.testimonial-list__table {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  overflow: hidden;
+}
+
+.testimonial-list__actions {
+  display: flex;
+  gap: 0.25rem;
+}

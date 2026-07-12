@@ -1,0 +1,31 @@
+<div class="login-page">
+  <div class="login-page__brand">
+    <span class="login-page__logo">P</span>
+    <h1>Welcome back</h1>
+    <p>Sign in to manage your portfolio.</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="login-page__form">
+    <div class="field">
+      <label for="usernameOrEmail">Username or email</label>
+      <input pInputText id="usernameOrEmail" formControlName="usernameOrEmail" placeholder="admin" />
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <p-password
+        inputId="password"
+        formControlName="password"
+        [feedback]="false"
+        [toggleMask]="true"
+        styleClass="w-full"
+      />
+    </div>
+
+    @if (errorMessage()) {
+      <p class="login-page__error">{{ errorMessage() }}</p>
+    }
+
+    <button pButton type="submit" label="Sign in" class="login-page__submit" [loading]="loading()"></button>
+  </form>
+</div>

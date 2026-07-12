@@ -1,0 +1,38 @@
+.timeline-card {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+  }
+}
+
+.timeline-card__marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.timeline-card__entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-bottom: 0.75rem;
+}
+
+.timeline-card__title {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.timeline-card__date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}

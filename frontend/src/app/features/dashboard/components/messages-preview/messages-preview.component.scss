@@ -1,0 +1,50 @@
+.messages-preview {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+  }
+}
+
+.messages-preview__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.messages-preview__item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.1rem 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--surface-border);
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.messages-preview__sender {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.messages-preview__excerpt {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.messages-preview__time {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  justify-self: end;
+}

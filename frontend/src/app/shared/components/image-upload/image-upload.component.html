@@ -1,0 +1,13 @@
+<div class="image-upload">
+  @if (previewUrl()) {
+    <div class="image-upload__preview">
+      <img [src]="previewUrl()" alt="Preview" />
+      <button pButton type="button" icon="pi pi-times" severity="danger" [text]="true" (click)="clear()"></button>
+    </div>
+  }
+
+  <label class="image-upload__field">
+    <input type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+    <span pButton type="button" [label]="uploading() ? 'Uploading...' : label()" [loading]="uploading()"></span>
+  </label>
+</div>

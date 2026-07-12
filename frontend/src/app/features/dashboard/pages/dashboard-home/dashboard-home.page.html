@@ -1,0 +1,26 @@
+<app-page-header title="Dashboard" subtitle="Overview of your portfolio content and activity" />
+
+<div class="dashboard-home__stats">
+  @for (card of statCards(); track card.title) {
+    <app-stat-card
+      [icon]="card.icon"
+      [title]="card.title"
+      [value]="card.value"
+      [trend]="card.trend"
+      [description]="card.description"
+    />
+  }
+</div>
+
+<div class="dashboard-home__analytics">
+  <app-activity-chart class="dashboard-home__chart" />
+  <app-recent-updates-timeline class="dashboard-home__timeline" />
+</div>
+
+<div class="dashboard-home__bottom">
+  <app-messages-preview class="dashboard-home__messages" />
+  <div class="dashboard-home__quick-actions">
+    <h3>Quick actions</h3>
+    <app-quick-actions />
+  </div>
+</div>

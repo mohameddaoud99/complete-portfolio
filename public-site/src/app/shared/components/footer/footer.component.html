@@ -1,0 +1,42 @@
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="footer__logo">MTD</span>
+      <p class="footer__tagline">{{ i18n.pick(profile()?.title, profile()?.titleFr) || 'Full Stack Developer' }}</p>
+    </div>
+
+    <nav class="footer__links">
+      <a routerLink="/about">{{ i18n.t('nav.about') }}</a>
+      <a routerLink="/projects">{{ i18n.t('nav.projects') }}</a>
+      <a routerLink="/articles">{{ i18n.t('nav.articles') }}</a>
+      <a routerLink="/contact">{{ i18n.t('nav.contact') }}</a>
+    </nav>
+
+    <div class="footer__socials">
+      @if (profile()?.githubUrl) {
+      <a [href]="profile()!.githubUrl!" target="_blank" rel="noopener" aria-label="GitHub">
+        <lucide-icon [img]="githubIcon" [size]="18" />
+      </a>
+      }
+      @if (profile()?.linkedinUrl) {
+      <a [href]="profile()!.linkedinUrl!" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <lucide-icon [img]="linkedinIcon" [size]="18" />
+      </a>
+      }
+      @if (profile()?.twitterUrl) {
+      <a [href]="profile()!.twitterUrl!" target="_blank" rel="noopener" aria-label="Twitter">
+        <lucide-icon [img]="twitterIcon" [size]="18" />
+      </a>
+      }
+      @if (profile()?.email) {
+      <a [href]="'mailto:' + profile()!.email" aria-label="Email">
+        <lucide-icon [img]="mailIcon" [size]="18" />
+      </a>
+      }
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>&copy; {{ year }} {{ profile()?.fullName }}. {{ i18n.t('footer.rights') }}</p>
+  </div>
+</footer>
