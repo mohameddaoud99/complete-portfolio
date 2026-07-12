@@ -6,4 +6,5 @@ export const environment = {
 
   apiUrl: "https://portfolio-backend-q60t.onrender.com/api",
   mediaBaseUrl: "https://portfolio-backend-q60t.onrender.com",
+  siteUrl: " https://public-site-portfolio.vercel.app/",
 };
