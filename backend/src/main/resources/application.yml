@@ -16,7 +16,8 @@ spring:
       max-request-size: 10MB
 
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/portfolio_db?sslmode=require&prepareThreshold=0}
+    #url: ${DB_URL:jdbc:postgresql://localhost:5432/portfolio_db?sslmode=require&prepareThreshold=0}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/portfolio_db}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
 
@@ -39,9 +40,11 @@ app:
     secret: ${JWT_SECRET:dev-only-change-me-dev-only-change-me-dev-only-change-me}
     access-token-expiration-minutes: ${JWT_ACCESS_EXPIRATION_MINUTES:15}
     refresh-token-expiration-days: ${JWT_REFRESH_EXPIRATION_DAYS:7}
-  media:
-    upload-dir: ${MEDIA_UPLOAD_DIR:./uploads}
-    public-path: /media-files
+  supabase:
+    storage:
+      service-url: ${SUPABASE_STORAGE_URL}
+      service-key: ${SUPABASE_SERVICE_KEY}
+      bucket: ${SUPABASE_BUCKET:portfolio-media}
 
 springdoc:
   api-docs:

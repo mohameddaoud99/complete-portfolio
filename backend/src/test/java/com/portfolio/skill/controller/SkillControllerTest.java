@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.portfolio.config.CorsProperties;
 import com.portfolio.config.JwtProperties;
-import com.portfolio.config.MediaProperties;
 import com.portfolio.config.SecurityConfig;
 import com.portfolio.security.AuthEntryPoint;
 import com.portfolio.security.CustomUserDetailsService;
@@ -34,7 +33,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(SkillController.class)
 @Import({SecurityConfig.class, AuthEntryPoint.class, JwtAuthenticationFilter.class})
-@EnableConfigurationProperties({JwtProperties.class, CorsProperties.class, MediaProperties.class})
+@EnableConfigurationProperties({JwtProperties.class, CorsProperties.class})
 class SkillControllerTest {
 
     private static final String VALID_TOKEN = "valid-token";
