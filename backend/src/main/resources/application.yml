@@ -43,7 +43,7 @@ app:
   supabase:
     storage:
       service-url: ${SUPABASE_STORAGE_URL}
-      service-key: ${SUPABASE_SERVICE_KEY}
+      service-key: ${SUPABASE_SERVICE_ROLE_KEY}
       bucket: ${SUPABASE_BUCKET:portfolio-media}
 
 springdoc:
