@@ -21,7 +21,11 @@ export class LoginPage {
   readonly errorMessage = signal<string | null>(null);
 
   readonly form = this.formBuilder.nonNullable.group({
-    usernameOrEmail: ['', Validators.required],
+    // ==========================================
+    // Legacy Spring Boot: was 'usernameOrEmail' (accepted username or email)
+    // Nouvelle implémentation Supabase: email uniquement
+    // ==========================================
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   });
 
@@ -31,18 +35,19 @@ export class LoginPage {
       return;
     }
 
-    const { usernameOrEmail, password } = this.form.getRawValue();
+    const { email, password } = this.form.getRawValue();
     this.loading.set(true);
     this.errorMessage.set(null);
 
-    this.authService.login(usernameOrEmail, password).subscribe({
+    this.authService.login(email, password).subscribe({
       next: () => {
         this.loading.set(false);
         this.router.navigate(['/dashboard']);
       },
-      error: () => {
+      error: (err: { message?: string; status?: number } | Error) => {
         this.loading.set(false);
-        this.errorMessage.set('Invalid username or password.');
+        const msg = (err as { message?: string }).message;
+        this.errorMessage.set(msg ?? 'Authentication failed.');
       }
     });
   }

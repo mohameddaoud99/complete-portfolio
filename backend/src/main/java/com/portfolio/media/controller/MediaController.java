@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Legacy implementation retained for demonstration purposes.
+ * The Angular frontend now uploads files directly to Supabase Storage
+ * and records metadata in the media_files table via Supabase Database.
+ * This REST controller is no longer called by the frontend.
+ */
 @RestController
 @RequestMapping("/api/media")
 public class MediaController {

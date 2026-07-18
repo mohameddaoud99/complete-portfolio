@@ -37,7 +37,7 @@
     </p-popover>
 
     <button class="topbar__profile" type="button" (click)="profileMenu.toggle($event)">
-      <p-avatar [label]="(currentUser()?.username?.charAt(0) ?? 'A') | uppercase" shape="circle" />
+      <p-avatar [label]="(currentUser()?.email?.charAt(0) ?? 'A') | uppercase" shape="circle" />
     </button>
     <p-menu #profileMenu [model]="profileMenuItems" [popup]="true" />
   </div>

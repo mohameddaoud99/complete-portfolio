@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Legacy implementation retained for demonstration purposes.
+ * The Angular frontend now manages articles directly via Supabase Database.
+ * This REST controller is no longer called by the frontend.
+ */
 @RestController
 @RequestMapping("/api/articles")
 public class ArticleController {

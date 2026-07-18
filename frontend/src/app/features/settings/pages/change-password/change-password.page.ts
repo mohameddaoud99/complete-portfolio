@@ -41,15 +41,27 @@ export class ChangePasswordPage {
 
     this.errorMessage.set(null);
     this.saving.set(true);
+
+    // ==========================================
+    // Legacy Spring Boot implementation
+    // Conservée uniquement comme référence
+    // ==========================================
+    // this.authService.changePassword(currentPassword, newPassword).subscribe({...})
+    // → PUT ${environment.apiUrl}/auth/change-password
+
+    // ==========================================
+    // Nouvelle implémentation Supabase Auth
+    // Re-authenticates with current password, then calls auth.updateUser()
+    // ==========================================
     this.authService.changePassword(currentPassword, newPassword).subscribe({
       next: () => {
         this.saving.set(false);
         this.form.reset();
         this.messageService.add({ severity: 'success', summary: 'Password updated' });
       },
-      error: (error) => {
+      error: (error: Error) => {
         this.saving.set(false);
-        this.errorMessage.set(error?.error?.message ?? 'Failed to update password.');
+        this.errorMessage.set(error?.message ?? 'Failed to update password.');
       }
     });
   }

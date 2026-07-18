@@ -7,8 +7,8 @@
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="login-page__form">
     <div class="field">
-      <label for="usernameOrEmail">Username or email</label>
-      <input pInputText id="usernameOrEmail" formControlName="usernameOrEmail" placeholder="admin" />
+      <label for="email">Email</label>
+      <input pInputText id="email" formControlName="email" type="email" placeholder="admin@example.com" />
     </div>
 
     <div class="field">

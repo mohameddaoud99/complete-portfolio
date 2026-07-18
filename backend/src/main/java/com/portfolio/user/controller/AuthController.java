@@ -25,6 +25,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Legacy implementation retained for demonstration purposes.
+ * The Angular frontend now communicates directly with Supabase Auth.
+ * This controller (Spring Security + JWT + refresh-token cookie) is no longer
+ * called by the frontend but remains as a reference for Java/Spring Boot skills.
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

@@ -7,15 +7,21 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 
 import { routes } from './app.routes';
-import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
+
+// ==========================================
+// Legacy Spring Boot: authInterceptor injected JWT Bearer tokens into every
+// HttpClient request and handled silent token refresh on 401 responses.
+// With Supabase Auth, the SDK manages tokens internally — interceptor removed.
+// ==========================================
+// import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([errorInterceptor, authInterceptor])),
+    provideHttpClient(withInterceptors([errorInterceptor])),
     providePrimeNG({
       theme: {
         preset: Aura,
