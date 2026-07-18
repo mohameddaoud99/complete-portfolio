@@ -1,6 +1,10 @@
 <div class="admin-layout">
   <app-sidebar [collapsed]="sidebarCollapsed()" (navigate)="onSidebarNavigate()" />
 
+  @if (!sidebarCollapsed() && isMobile()) {
+    <div class="admin-layout__backdrop" (click)="toggleSidebar()"></div>
+  }
+
   <div class="admin-layout__main">
     <app-topbar (toggleSidebar)="toggleSidebar()" />
 

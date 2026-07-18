@@ -9,8 +9,10 @@
   </div>
 
   <div class="topbar__actions">
-    <p-select [options]="languages" optionLabel="label" [ngModel]="currentLanguage()"
-      (ngModelChange)="onLanguageChange($event)" styleClass="topbar__language-select" />
+    <span class="topbar__lang-wrapper">
+      <p-select [options]="languages" optionLabel="label" [ngModel]="currentLanguage()"
+        (ngModelChange)="onLanguageChange($event)" styleClass="topbar__language-select" />
+    </span>
 
     <button class="topbar__icon-btn" type="button" (click)="toggleTheme()">
       <lucide-icon [img]="theme() === 'dark' ? sunIcon : moonIcon" [size]="20" />

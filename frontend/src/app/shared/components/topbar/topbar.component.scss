@@ -120,3 +120,22 @@
   font-size: 0.78rem;
   color: var(--text-secondary);
 }
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 1rem;
+    gap: 0.5rem;
+  }
+
+  .topbar__search {
+    display: none;
+  }
+
+  .topbar__lang-wrapper {
+    display: none;
+  }
+
+  .topbar__actions {
+    gap: 0.25rem;
+  }
+}
