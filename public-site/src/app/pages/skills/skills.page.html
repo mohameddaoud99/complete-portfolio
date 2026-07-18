@@ -24,8 +24,8 @@
     </div>
 
     <div class="skills-grid">
-      @for (skill of filteredSkills(); track skill.id) {
-        <div class="skill-card glass-panel" appReveal>
+      @for (skill of filteredSkills(); track skill.id; let i = $index) {
+        <div class="skill-card glass-panel" appReveal revealVariant="scale" [revealDelay]="i < 10 ? i * 70 : 0">
           <div class="skill-card__icon">
             <lucide-icon [img]="resolveIcon(skill.icon)" [size]="26" />
           </div>

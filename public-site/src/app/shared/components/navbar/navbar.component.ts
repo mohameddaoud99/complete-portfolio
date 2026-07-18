@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, HostListener, PLATFORM_ID, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Languages, LucideAngularModule, Menu, MoonStar, SunMedium, X } from 'lucide-angular';
 import { I18nService } from '../../../core/services/i18n.service';
@@ -26,6 +27,8 @@ const NAV_LINKS: NavLink[] = [
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+  private readonly platformId = inject(PLATFORM_ID);
+
   readonly menuIcon = Menu;
   readonly closeIcon = X;
   readonly sunIcon = SunMedium;
@@ -34,11 +37,19 @@ export class NavbarComponent {
 
   readonly navLinks = NAV_LINKS;
   readonly mobileOpen = signal(false);
+  readonly scrolled = signal(false);
 
   constructor(
     readonly i18n: I18nService,
     readonly themeService: ThemeService
   ) {}
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.scrolled.set(window.scrollY > 48);
+    }
+  }
 
   toggleMobile(): void {
     this.mobileOpen.update((open) => !open);

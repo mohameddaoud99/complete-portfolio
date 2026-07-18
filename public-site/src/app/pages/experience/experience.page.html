@@ -3,8 +3,8 @@
 
   @if (experiences().length > 0) {
     <div class="timeline">
-      @for (item of experiences(); track item.id) {
-        <div class="timeline__item" appReveal>
+      @for (item of experiences(); track item.id; let i = $index) {
+        <div class="timeline__item" appReveal revealVariant="slide-left" [revealDelay]="i * 100">
           <div class="timeline__marker"></div>
           <div class="timeline__content glass-panel">
             <span class="timeline__period">
