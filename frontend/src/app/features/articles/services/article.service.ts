@@ -49,10 +49,16 @@ export class ArticleService {
   }
 
   create(request: ArticleRequest): Observable<Article> {
+    const base = request.title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    const slug = `${base}-${Date.now()}`;
+
     return from(
       this.supabase.client
         .from('articles')
-        .insert(this.toRow(request))
+        .insert({ ...this.toRow(request), slug })
         .select()
         .single()
         .then(({ data, error }) => {

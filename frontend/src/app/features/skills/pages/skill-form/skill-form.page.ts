@@ -77,7 +77,10 @@ export class SkillFormPage implements OnInit {
         this.messageService.add({ severity: 'success', summary: this.isEditMode ? 'Skill updated' : 'Skill created' });
         this.router.navigate(['/skills']);
       },
-      error: () => this.saving.set(false)
+      error: (err) => {
+        this.saving.set(false);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: err?.message ?? 'Failed to save skill' });
+      }
     });
   }
 }

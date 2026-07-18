@@ -43,11 +43,12 @@ export class ProfileService {
     );
   }
 
-  update(request: ProfileRequest): Observable<Profile> {
+  update(id: string, request: ProfileRequest): Observable<Profile> {
     return from(
       this.supabase.client
         .from('profile')
         .update(this.toRow(request))
+        .eq('id', id)
         .select()
         .single()
         .then(({ data, error }) => {

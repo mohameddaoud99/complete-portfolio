@@ -98,7 +98,10 @@ export class ProjectFormPage implements OnInit {
         this.messageService.add({ severity: 'success', summary: this.isEditMode ? 'Project updated' : 'Project created' });
         this.router.navigate(['/projects']);
       },
-      error: () => this.saving.set(false)
+      error: (err) => {
+        this.saving.set(false);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: err?.message ?? 'Failed to save project' });
+      }
     });
   }
 }

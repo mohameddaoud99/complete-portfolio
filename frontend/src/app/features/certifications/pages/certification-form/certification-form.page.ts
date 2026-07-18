@@ -91,7 +91,10 @@ export class CertificationFormPage implements OnInit {
         this.messageService.add({ severity: 'success', summary: this.isEditMode ? 'Certification updated' : 'Certification created' });
         this.router.navigate(['/certifications']);
       },
-      error: () => this.saving.set(false)
+      error: (err) => {
+        this.saving.set(false);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: err?.message ?? 'Failed to save certification' });
+      }
     });
   }
 }

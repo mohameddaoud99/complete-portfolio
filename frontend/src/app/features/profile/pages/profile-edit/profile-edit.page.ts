@@ -20,6 +20,7 @@ export class ProfileEditPage implements OnInit {
   private readonly messageService = inject(MessageService);
 
   readonly saving = signal(false);
+  readonly profileId = signal<string | null>(null);
   readonly avatarUrl = signal<string | null>(null);
 
   readonly form = this.formBuilder.nonNullable.group({
@@ -42,6 +43,7 @@ export class ProfileEditPage implements OnInit {
 
   ngOnInit(): void {
     this.profileService.get().subscribe((profile) => {
+      this.profileId.set(profile.id);
       this.avatarUrl.set(profile.avatarUrl);
       this.form.patchValue({
         fullName: profile.fullName,
@@ -70,12 +72,15 @@ export class ProfileEditPage implements OnInit {
     }
 
     this.saving.set(true);
-    this.profileService.update({ ...this.form.getRawValue(), avatarUrl: this.avatarUrl() }).subscribe({
+    this.profileService.update(this.profileId()!, { ...this.form.getRawValue(), avatarUrl: this.avatarUrl() }).subscribe({
       next: () => {
         this.saving.set(false);
         this.messageService.add({ severity: 'success', summary: 'Profile updated' });
       },
-      error: () => this.saving.set(false)
+      error: (err) => {
+        this.saving.set(false);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: err?.message ?? 'Failed to save profile' });
+      }
     });
   }
 }
