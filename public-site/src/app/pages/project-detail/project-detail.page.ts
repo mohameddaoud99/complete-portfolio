@@ -39,13 +39,13 @@ export class ProjectDetailPage implements OnInit {
       .map((tech) => tech.trim())
       .filter(Boolean)
   );
-  readonly screenshotUrls = computed(() =>
-    (this.project()?.screenshots ?? '')
-      .split('\n')
-      .map((url) => url.trim())
-      .filter(Boolean)
-      .map((url) => this.mediaService.resolveUrl(url))
-  );
+  readonly screenshotUrls = computed(() => {
+    const raw = this.project()?.screenshots ?? '[]';
+    const urls: string[] = (() => {
+      try { return JSON.parse(raw); } catch { return raw.split('\n').map((u: string) => u.trim()).filter(Boolean); }
+    })();
+    return urls.map((url) => this.mediaService.resolveUrl(url));
+  });
 
   ngOnInit(): void {
     this.route.paramMap

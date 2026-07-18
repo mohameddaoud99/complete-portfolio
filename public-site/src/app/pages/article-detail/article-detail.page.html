@@ -25,6 +25,14 @@
 
     <div class="article-detail__content" [innerHTML]="content()"></div>
 
+    @if (extraImageUrls().length > 0) {
+      <div class="article-detail__gallery">
+        @for (url of extraImageUrls(); track url) {
+          <img [src]="url" [alt]="title()" loading="lazy" />
+        }
+      </div>
+    }
+
     @if (tagList().length > 0) {
       <div class="article-detail__tags">
         @for (tag of tagList(); track tag) {

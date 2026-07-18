@@ -1,7 +1,7 @@
 <app-page-header [title]="isEditMode ? 'Edit Project' : 'Add Project'" />
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
-  <app-image-upload [(imageUrl)]="imageUrl" label="Upload project image" />
+  <app-multi-image-upload [(images)]="images" label="Add project image" />
 
   <div class="form-grid">
     <div class="field field--full">
@@ -52,11 +52,6 @@
     <div class="field">
       <label for="displayOrder">Display order</label>
       <p-inputnumber id="displayOrder" formControlName="displayOrder" [showButtons]="true" />
-    </div>
-
-    <div class="field field--full">
-      <label for="screenshots">Screenshot URLs (one per line)</label>
-      <textarea pTextarea id="screenshots" formControlName="screenshots" rows="3"></textarea>
     </div>
 
     <div class="field project-form__featured">

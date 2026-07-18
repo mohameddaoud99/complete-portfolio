@@ -8,6 +8,7 @@ export interface Article {
   contentHtml: string | null;
   contentHtmlFr: string | null;
   coverImageUrl: string | null;
+  images: string | null;
   category: string | null;
   tags: string | null;
   featured: boolean;

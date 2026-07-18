@@ -126,6 +126,34 @@
   color: var(--text-muted);
 }
 
+.credential-item__badge {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.credential-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.credential-item__extra-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--surface-border);
+  }
+}
+
 @media (max-width: 760px) {
   .about-hero {
     grid-template-columns: 1fr;

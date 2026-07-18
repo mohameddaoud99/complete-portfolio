@@ -53,6 +53,13 @@ export class ArticleDetailPage implements OnInit {
       this.i18n.pick(this.article()?.contentHtml, this.article()?.contentHtmlFr) ?? ''
     )
   );
+  readonly extraImageUrls = computed(() => {
+    const raw = this.article()?.images ?? '[]';
+    const urls: string[] = (() => {
+      try { return JSON.parse(raw); } catch { return []; }
+    })();
+    return urls.map((url) => this.mediaService.resolveUrl(url)).filter(Boolean) as string[];
+  });
 
   ngOnInit(): void {
     this.route.paramMap

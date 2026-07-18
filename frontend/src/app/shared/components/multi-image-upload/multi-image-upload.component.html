@@ -1,0 +1,20 @@
+<div class="multi-upload">
+  @if (images().length > 0) {
+    <div class="multi-upload__grid">
+      @for (url of images(); track url; let i = $index) {
+        <div class="multi-upload__item">
+          <img [src]="resolveUrl(url)" alt="Image {{ i + 1 }}" />
+          @if (i === 0) {
+            <span class="multi-upload__badge">Cover</span>
+          }
+          <button pButton type="button" icon="pi pi-times" severity="danger" [text]="true" (click)="remove(i)"></button>
+        </div>
+      }
+    </div>
+  }
+
+  <label class="multi-upload__add">
+    <input type="file" accept="image/*" multiple (change)="onFileSelected($event)" hidden />
+    <span pButton type="button" icon="pi pi-plus" [label]="uploading() ? 'Uploading...' : label()" [loading]="uploading()"></span>
+  </label>
+</div>

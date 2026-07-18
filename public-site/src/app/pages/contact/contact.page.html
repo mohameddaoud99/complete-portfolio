@@ -5,22 +5,42 @@
     <form class="contact-form glass-panel" [formGroup]="form" (ngSubmit)="submit()" appReveal>
       <div class="contact-form__field">
         <label for="senderName">{{ i18n.t('contact.form.name') }}</label>
-        <input id="senderName" type="text" formControlName="senderName" />
+        <input id="senderName" type="text" formControlName="senderName" [class.contact-form__input--error]="form.get('senderName')?.invalid && form.get('senderName')?.touched" />
+        @if (form.get('senderName')?.touched && form.get('senderName')?.hasError('required')) {
+          <span class="contact-form__error">{{ i18n.t('contact.form.required') }}</span>
+        } @else if (form.get('senderName')?.touched && form.get('senderName')?.hasError('minlength')) {
+          <span class="contact-form__error">{{ i18n.t('contact.form.tooShort') }}</span>
+        }
       </div>
 
       <div class="contact-form__field">
         <label for="senderEmail">{{ i18n.t('contact.form.email') }}</label>
-        <input id="senderEmail" type="email" formControlName="senderEmail" />
+        <input id="senderEmail" type="email" formControlName="senderEmail" [class.contact-form__input--error]="form.get('senderEmail')?.invalid && form.get('senderEmail')?.touched" />
+        @if (form.get('senderEmail')?.touched && form.get('senderEmail')?.hasError('required')) {
+          <span class="contact-form__error">{{ i18n.t('contact.form.required') }}</span>
+        } @else if (form.get('senderEmail')?.touched && form.get('senderEmail')?.hasError('email')) {
+          <span class="contact-form__error">{{ i18n.t('contact.form.emailInvalid') }}</span>
+        }
       </div>
 
       <div class="contact-form__field">
         <label for="subject">{{ i18n.t('contact.form.subject') }}</label>
-        <input id="subject" type="text" formControlName="subject" />
+        <input id="subject" type="text" formControlName="subject" [class.contact-form__input--error]="form.get('subject')?.invalid && form.get('subject')?.touched" />
+        @if (form.get('subject')?.touched && form.get('subject')?.hasError('required')) {
+          <span class="contact-form__error">{{ i18n.t('contact.form.required') }}</span>
+        } @else if (form.get('subject')?.touched && form.get('subject')?.hasError('minlength')) {
+          <span class="contact-form__error">{{ i18n.t('contact.form.tooShort') }}</span>
+        }
       </div>
 
       <div class="contact-form__field">
         <label for="body">{{ i18n.t('contact.form.message') }}</label>
-        <textarea id="body" rows="5" formControlName="body"></textarea>
+        <textarea id="body" rows="5" formControlName="body" [class.contact-form__input--error]="form.get('body')?.invalid && form.get('body')?.touched"></textarea>
+        @if (form.get('body')?.touched && form.get('body')?.hasError('required')) {
+          <span class="contact-form__error">{{ i18n.t('contact.form.required') }}</span>
+        } @else if (form.get('body')?.touched && form.get('body')?.hasError('minlength')) {
+          <span class="contact-form__error">{{ i18n.t('contact.form.tooShort') }}</span>
+        }
       </div>
 
       <button type="submit" class="btn btn--primary" [disabled]="status() === 'submitting'">

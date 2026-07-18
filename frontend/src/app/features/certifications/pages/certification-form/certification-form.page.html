@@ -1,6 +1,8 @@
 <app-page-header [title]="isEditMode ? 'Edit Certification' : 'Add Certification'" />
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
+  <app-multi-image-upload [(images)]="images" label="Add badge image" />
+
   <div class="form-grid">
     <div class="field field--full">
       <label for="name">Name</label>

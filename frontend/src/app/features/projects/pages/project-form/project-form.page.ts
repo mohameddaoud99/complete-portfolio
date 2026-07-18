@@ -7,9 +7,16 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
-import { ImageUploadComponent } from '../../../../shared/components/image-upload/image-upload.component';
+import { MultiImageUploadComponent } from '../../../../shared/components/multi-image-upload/multi-image-upload.component';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 import { ProjectService } from '../../services/project.service';
+
+function parseImages(imageUrl: string | null, screenshots: string | null): string[] {
+  const extra: string[] = (() => {
+    try { return JSON.parse(screenshots ?? '[]'); } catch { return []; }
+  })();
+  return [imageUrl, ...extra].filter((u): u is string => !!u);
+}
 
 @Component({
   selector: 'app-project-form-page',
@@ -21,7 +28,7 @@ import { ProjectService } from '../../services/project.service';
     TextareaModule,
     ToggleSwitchModule,
     PageHeaderComponent,
-    ImageUploadComponent
+    MultiImageUploadComponent
   ],
   templateUrl: './project-form.page.html',
   styleUrl: './project-form.page.scss'
@@ -35,7 +42,7 @@ export class ProjectFormPage implements OnInit {
 
   readonly saving = signal(false);
   readonly projectId = signal<string | null>(null);
-  readonly imageUrl = signal<string | null>(null);
+  readonly images = signal<string[]>([]);
 
   readonly form = this.formBuilder.nonNullable.group({
     title: ['', Validators.required],
@@ -47,7 +54,6 @@ export class ProjectFormPage implements OnInit {
     repoUrl: [''],
     liveUrl: [''],
     category: [''],
-    screenshots: [''],
     featured: [false],
     displayOrder: [0]
   });
@@ -61,7 +67,7 @@ export class ProjectFormPage implements OnInit {
     if (id) {
       this.projectId.set(id);
       this.projectService.get(id).subscribe((project) => {
-        this.imageUrl.set(project.imageUrl);
+        this.images.set(parseImages(project.imageUrl, project.screenshots));
         this.form.patchValue({
           title: project.title,
           summary: project.summary ?? '',
@@ -72,7 +78,6 @@ export class ProjectFormPage implements OnInit {
           repoUrl: project.repoUrl ?? '',
           liveUrl: project.liveUrl ?? '',
           category: project.category ?? '',
-          screenshots: project.screenshots ?? '',
           featured: project.featured,
           displayOrder: project.displayOrder
         });
@@ -86,8 +91,13 @@ export class ProjectFormPage implements OnInit {
       return;
     }
 
+    const [first, ...rest] = this.images();
     this.saving.set(true);
-    const request = { ...this.form.getRawValue(), imageUrl: this.imageUrl() };
+    const request = {
+      ...this.form.getRawValue(),
+      imageUrl: first ?? null,
+      screenshots: rest.length ? JSON.stringify(rest) : null
+    };
     const result$ = this.isEditMode
       ? this.projectService.update(this.projectId()!, request)
       : this.projectService.create(request);

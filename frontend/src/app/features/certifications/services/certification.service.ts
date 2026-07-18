@@ -98,6 +98,7 @@ export class CertificationService {
       expiryDate: row['expiry_date'] as string | null,
       credentialUrl: row['credential_url'] as string | null,
       badgeImageUrl: row['badge_image_url'] as string | null,
+      images: row['images'] as string | null,
       displayOrder: row['display_order'] as number
     };
   }
@@ -110,6 +111,7 @@ export class CertificationService {
       expiry_date: request.expiryDate,
       credential_url: request.credentialUrl,
       badge_image_url: request.badgeImageUrl,
+      images: request.images,
       display_order: request.displayOrder
     };
   }

@@ -270,6 +270,7 @@ export class ApiService {
       expiryDate: row['expiry_date'] as string | null,
       credentialUrl: row['credential_url'] as string | null,
       badgeImageUrl: row['badge_image_url'] as string | null,
+      images: row['images'] as string | null,
       displayOrder: row['display_order'] as number
     };
   }
@@ -320,6 +321,7 @@ export class ApiService {
       contentHtml: row['content_html'] as string | null,
       contentHtmlFr: row['content_html_fr'] as string | null,
       coverImageUrl: row['cover_image_url'] as string | null,
+      images: row['images'] as string | null,
       category: row['category'] as string | null,
       tags: row['tags'] as string | null,
       featured: row['featured'] as boolean,

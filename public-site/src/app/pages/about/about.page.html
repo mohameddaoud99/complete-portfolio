@@ -90,10 +90,21 @@
     <div class="credential-list">
       @for (item of certifications(); track item.id) {
         <div class="credential-item glass-panel">
-          <lucide-icon [img]="certificationIcon" [size]="20" />
-          <div>
+          @if (item.badgeImageUrl) {
+            <img class="credential-item__badge" [src]="item.badgeImageUrl" [alt]="item.name" />
+          } @else {
+            <lucide-icon [img]="certificationIcon" [size]="20" />
+          }
+          <div class="credential-item__info">
             <h4>{{ item.name }}<span> — {{ item.issuer }}</span></h4>
             <p class="credential-item__period">{{ item.issueDate | date: 'MMM y' }}</p>
+            @if (certificationExtraImages(item).length > 0) {
+              <div class="credential-item__extra-images">
+                @for (url of certificationExtraImages(item); track url) {
+                  <img [src]="url" [alt]="item.name" loading="lazy" />
+                }
+              </div>
+            }
           </div>
         </div>
       }

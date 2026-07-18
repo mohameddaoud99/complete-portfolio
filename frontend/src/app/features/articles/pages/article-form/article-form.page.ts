@@ -7,9 +7,16 @@ import { EditorModule } from 'primeng/editor';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
-import { ImageUploadComponent } from '../../../../shared/components/image-upload/image-upload.component';
+import { MultiImageUploadComponent } from '../../../../shared/components/multi-image-upload/multi-image-upload.component';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 import { ArticleService } from '../../services/article.service';
+
+function parseImages(coverImageUrl: string | null, images: string | null): string[] {
+  const extra: string[] = (() => {
+    try { return JSON.parse(images ?? '[]'); } catch { return []; }
+  })();
+  return [coverImageUrl, ...extra].filter((u): u is string => !!u);
+}
 
 @Component({
   selector: 'app-article-form-page',
@@ -21,7 +28,7 @@ import { ArticleService } from '../../services/article.service';
     EditorModule,
     ToggleSwitchModule,
     PageHeaderComponent,
-    ImageUploadComponent
+    MultiImageUploadComponent
   ],
   templateUrl: './article-form.page.html',
   styleUrl: './article-form.page.scss'
@@ -35,7 +42,7 @@ export class ArticleFormPage implements OnInit {
 
   readonly saving = signal(false);
   readonly articleId = signal<string | null>(null);
-  readonly coverImageUrl = signal<string | null>(null);
+  readonly images = signal<string[]>([]);
 
   readonly form = this.formBuilder.nonNullable.group({
     title: ['', Validators.required],
@@ -59,7 +66,7 @@ export class ArticleFormPage implements OnInit {
     if (id) {
       this.articleId.set(id);
       this.articleService.get(id).subscribe((article) => {
-        this.coverImageUrl.set(article.coverImageUrl);
+        this.images.set(parseImages(article.coverImageUrl, article.images));
         this.form.patchValue({
           title: article.title,
           titleFr: article.titleFr ?? '',
@@ -82,8 +89,13 @@ export class ArticleFormPage implements OnInit {
       return;
     }
 
+    const [first, ...rest] = this.images();
     this.saving.set(true);
-    const request = { ...this.form.getRawValue(), coverImageUrl: this.coverImageUrl() };
+    const request = {
+      ...this.form.getRawValue(),
+      coverImageUrl: first ?? null,
+      images: rest.length ? JSON.stringify(rest) : null
+    };
     const result$ = this.isEditMode
       ? this.articleService.update(this.articleId()!, request)
       : this.articleService.create(request);

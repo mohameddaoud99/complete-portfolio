@@ -1,7 +1,7 @@
 <app-page-header [title]="isEditMode ? 'Edit Article' : 'Create Article'" />
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="form-panel glass-panel">
-  <app-image-upload [(imageUrl)]="coverImageUrl" label="Upload cover image" />
+  <app-multi-image-upload [(images)]="images" label="Add cover / article image" />
 
   <div class="form-grid">
     <div class="field field--full">

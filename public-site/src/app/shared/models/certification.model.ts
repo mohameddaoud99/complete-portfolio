@@ -6,5 +6,6 @@ export interface Certification {
   expiryDate: string | null;
   credentialUrl: string | null;
   badgeImageUrl: string | null;
+  images: string | null;
   displayOrder: number;
 }

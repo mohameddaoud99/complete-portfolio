@@ -111,6 +111,20 @@
   }
 }
 
+.article-detail__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
+
+  img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+  }
+}
+
 .article-detail__tags {
   display: flex;
   flex-wrap: wrap;

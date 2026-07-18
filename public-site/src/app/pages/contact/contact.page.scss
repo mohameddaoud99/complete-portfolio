@@ -53,6 +53,20 @@
   }
 }
 
+.contact-form__error {
+  font-size: 0.78rem;
+  color: #dc2626;
+  margin-top: 0.1rem;
+}
+
+.contact-form__input--error {
+  border-color: #dc2626 !important;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
+  }
+}
+
 .contact-form button {
   align-self: flex-start;
 }
