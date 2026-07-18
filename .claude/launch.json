@@ -11,7 +11,7 @@
       "name": "public-site",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "start", "--prefix", "public-site"],
-      "port": 4300
+      "port": 3000
     }
   ]
 }

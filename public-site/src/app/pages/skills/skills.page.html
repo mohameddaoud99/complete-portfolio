@@ -31,8 +31,10 @@
           </div>
           <h3>{{ skill.name }}</h3>
           <span class="skill-card__category">{{ skill.category }}</span>
-          <div class="skill-card__bar">
-            <div class="skill-card__bar-fill" [style.width.%]="skill.proficiency"></div>
+          <div class="skill-card__stars">
+            @for (star of [1, 2, 3, 4, 5]; track star) {
+              <span class="skill-card__star" [class.skill-card__star--filled]="star <= skill.proficiency">★</span>
+            }
           </div>
           <span class="skill-card__years">{{ skill.yearsExperience }} {{ i18n.t('skills.years') }}</span>
         </div>

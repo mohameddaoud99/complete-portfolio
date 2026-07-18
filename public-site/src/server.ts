@@ -11,7 +11,7 @@ const indexHtml = join(serverDistFolder, 'index.server.html');
 
 const app = express();
 const commonEngine = new CommonEngine({
-  allowedHosts: ['localhost:4000', 'localhost:4300', 'localhost'],
+  allowedHosts: ['localhost:4000', 'localhost:4300', 'localhost', 'public-site-portfolio.vercel.app'],
 });
 
 /**
