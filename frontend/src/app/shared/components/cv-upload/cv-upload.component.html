@@ -1,0 +1,32 @@
+<div class="cv-upload">
+  <label class="cv-upload__label">CV / Resume</label>
+
+  @if (cvUrl()) {
+    <div class="cv-upload__current">
+      <div class="cv-upload__file">
+        <i class="pi pi-file-pdf cv-upload__icon"></i>
+        <div class="cv-upload__info">
+          <span class="cv-upload__name">{{ fileName }}</span>
+          <span class="cv-upload__hint">Current CV</span>
+        </div>
+      </div>
+      <div class="cv-upload__actions">
+        <a [href]="cvUrl()!" target="_blank" rel="noopener">
+          <button pButton type="button" icon="pi pi-download" label="View" severity="secondary" [text]="true"></button>
+        </a>
+        <button pButton type="button" icon="pi pi-trash" label="Remove" severity="danger" [text]="true"
+          [loading]="removing()" (click)="remove()"></button>
+      </div>
+    </div>
+  }
+
+  <label class="cv-upload__field">
+    <input type="file" accept="application/pdf" (change)="onFileSelected($event)" hidden />
+    <span pButton type="button"
+      [icon]="cvUrl() ? 'pi pi-refresh' : 'pi pi-upload'"
+      [label]="uploading() ? 'Uploading...' : (cvUrl() ? 'Replace CV' : label())"
+      [loading]="uploading()"
+      severity="secondary">
+    </span>
+  </label>
+</div>

@@ -64,9 +64,8 @@
       <input pInputText id="websiteUrl" formControlName="websiteUrl" />
     </div>
 
-    <div class="field">
-      <label for="resumeUrl">Resume URL</label>
-      <input pInputText id="resumeUrl" formControlName="resumeUrl" />
+    <div class="field field--full">
+      <app-cv-upload [(cvUrl)]="cvUrl" />
     </div>
 
     <div class="field field--full">

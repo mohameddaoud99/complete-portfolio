@@ -6,11 +6,12 @@ import { MessageService } from 'primeng/api';
 import { TextareaModule } from 'primeng/textarea';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 import { ImageUploadComponent } from '../../../../shared/components/image-upload/image-upload.component';
+import { CvUploadComponent } from '../../../../shared/components/cv-upload/cv-upload.component';
 import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-profile-edit-page',
-  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, TextareaModule, PageHeaderComponent, ImageUploadComponent],
+  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, TextareaModule, PageHeaderComponent, ImageUploadComponent, CvUploadComponent],
   templateUrl: './profile-edit.page.html',
   styleUrl: './profile-edit.page.scss'
 })
@@ -22,6 +23,7 @@ export class ProfileEditPage implements OnInit {
   readonly saving = signal(false);
   readonly profileId = signal<string | null>(null);
   readonly avatarUrl = signal<string | null>(null);
+  readonly cvUrl = signal<string | null>(null);
 
   readonly form = this.formBuilder.nonNullable.group({
     fullName: ['', Validators.required],
@@ -36,7 +38,6 @@ export class ProfileEditPage implements OnInit {
     linkedinUrl: [''],
     twitterUrl: [''],
     websiteUrl: [''],
-    resumeUrl: [''],
     seoTitle: [''],
     seoDescription: ['']
   });
@@ -45,6 +46,7 @@ export class ProfileEditPage implements OnInit {
     this.profileService.get().subscribe((profile) => {
       this.profileId.set(profile.id);
       this.avatarUrl.set(profile.avatarUrl);
+      this.cvUrl.set(profile.resumeUrl ?? null);
       this.form.patchValue({
         fullName: profile.fullName,
         title: profile.title ?? '',
@@ -58,7 +60,6 @@ export class ProfileEditPage implements OnInit {
         linkedinUrl: profile.linkedinUrl ?? '',
         twitterUrl: profile.twitterUrl ?? '',
         websiteUrl: profile.websiteUrl ?? '',
-        resumeUrl: profile.resumeUrl ?? '',
         seoTitle: profile.seoTitle ?? '',
         seoDescription: profile.seoDescription ?? ''
       });
@@ -72,7 +73,7 @@ export class ProfileEditPage implements OnInit {
     }
 
     this.saving.set(true);
-    this.profileService.update(this.profileId()!, { ...this.form.getRawValue(), avatarUrl: this.avatarUrl() }).subscribe({
+    this.profileService.update(this.profileId()!, { ...this.form.getRawValue(), avatarUrl: this.avatarUrl(), resumeUrl: this.cvUrl() }).subscribe({
       next: () => {
         this.saving.set(false);
         this.messageService.add({ severity: 'success', summary: 'Profile updated' });

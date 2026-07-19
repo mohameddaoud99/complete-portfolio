@@ -25,7 +25,7 @@
       }
     </button>
 
-    <p-popover #notifPopover>
+    <p-popover #notifPopover appendTo="body">
       <div class="notifications-panel">
         <h4>Notifications</h4>
         @for (notification of notifications(); track notification.id) {
@@ -41,6 +41,6 @@
     <button class="topbar__profile" type="button" (click)="profileMenu.toggle($event)">
       <p-avatar [label]="(currentUser()?.email?.charAt(0) ?? 'A') | uppercase" shape="circle" />
     </button>
-    <p-menu #profileMenu [model]="profileMenuItems" [popup]="true" />
+    <p-menu #profileMenu [model]="profileMenuItems" [popup]="true" appendTo="body" />
   </div>
 </header>
