@@ -39,6 +39,11 @@ export class AboutPage implements OnInit {
 
   readonly avatarUrl = computed(() => this.mediaService.resolveUrl(this.profile()?.avatarUrl));
   readonly bio = computed(() => this.i18n.pick(this.profile()?.bio, this.profile()?.bioFr));
+  readonly resumeUrl = computed(() => {
+    const p = this.profile();
+    if (!p) return null;
+    return this.i18n.lang() === 'fr' && p.resumeUrlFr ? p.resumeUrlFr : p.resumeUrl;
+  });
 
   certificationExtraImages(cert: Certification): string[] {
     try { return JSON.parse(cert.images ?? '[]'); } catch { return []; }

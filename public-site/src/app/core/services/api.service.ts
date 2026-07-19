@@ -211,6 +211,7 @@ export class ApiService {
       twitterUrl: row['twitter_url'] as string | null,
       websiteUrl: row['website_url'] as string | null,
       resumeUrl: row['resume_url'] as string | null,
+      resumeUrlFr: row['resume_url_fr'] as string | null,
       seoTitle: row['seo_title'] as string | null,
       seoDescription: row['seo_description'] as string | null,
       updatedAt: row['updated_at'] as string

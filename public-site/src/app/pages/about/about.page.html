@@ -10,8 +10,8 @@
     <span class="about-hero__eyebrow">{{ i18n.t('about.title') }}</span>
     <h1>{{ i18n.t('about.subtitle') }}</h1>
     <p>{{ bio() }}</p>
-    @if (profile()?.resumeUrl) {
-      <a [href]="profile()!.resumeUrl!" target="_blank" rel="noopener" class="btn btn--primary">
+    @if (resumeUrl()) {
+      <a [href]="resumeUrl()!" target="_blank" rel="noopener" class="btn btn--primary">
         <lucide-icon [img]="downloadIcon" [size]="16" />
         {{ i18n.t('about.resume') }}
       </a>

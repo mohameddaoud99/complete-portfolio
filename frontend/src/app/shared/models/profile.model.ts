@@ -14,6 +14,7 @@ export interface Profile {
   twitterUrl: string | null;
   websiteUrl: string | null;
   resumeUrl: string | null;
+  resumeUrlFr: string | null;
   seoTitle: string | null;
   seoDescription: string | null;
   updatedAt: string;

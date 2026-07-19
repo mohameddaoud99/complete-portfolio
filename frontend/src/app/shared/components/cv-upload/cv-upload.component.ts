@@ -14,17 +14,20 @@ export class CvUploadComponent {
   private readonly messageService = inject(MessageService);
 
   readonly cvUrl = model<string | null>(null);
-  readonly label = input('Upload CV (PDF)');
+  readonly lang = input<'en' | 'fr'>('en');
 
   readonly uploading = signal(false);
   readonly removing = signal(false);
+
+  get label(): string {
+    return this.lang() === 'fr' ? 'CV Français (PDF)' : 'CV English (PDF)';
+  }
 
   get fileName(): string | null {
     const url = this.cvUrl();
     if (!url) return null;
     try {
-      const decoded = decodeURIComponent(url.split('?')[0]);
-      return decoded.split('/').pop() ?? 'cv.pdf';
+      return decodeURIComponent(url.split('?')[0]).split('/').pop() ?? 'cv.pdf';
     } catch {
       return 'cv.pdf';
     }
@@ -42,7 +45,11 @@ export class CvUploadComponent {
     }
 
     this.uploading.set(true);
-    this.storageService.uploadResume(file).subscribe({
+    const upload$ = this.lang() === 'fr'
+      ? this.storageService.uploadResumeFr(file)
+      : this.storageService.uploadResume(file);
+
+    upload$.subscribe({
       next: (result) => {
         this.cvUrl.set(result.publicUrl);
         this.uploading.set(false);
@@ -58,7 +65,11 @@ export class CvUploadComponent {
 
   remove(): void {
     this.removing.set(true);
-    this.storageService.removeResume().subscribe({
+    const remove$ = this.lang() === 'fr'
+      ? this.storageService.removeResumeFr()
+      : this.storageService.removeResume();
+
+    remove$.subscribe({
       next: () => {
         this.cvUrl.set(null);
         this.removing.set(false);

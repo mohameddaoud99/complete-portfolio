@@ -1,5 +1,6 @@
 <div class="cv-upload">
-  <label class="cv-upload__label">CV / Resume</label>
+  <label class="cv-upload__label">{{ label }}</label>
+
 
   @if (cvUrl()) {
     <div class="cv-upload__current">
@@ -24,7 +25,7 @@
     <input type="file" accept="application/pdf" (change)="onFileSelected($event)" hidden />
     <span pButton type="button"
       [icon]="cvUrl() ? 'pi pi-refresh' : 'pi pi-upload'"
-      [label]="uploading() ? 'Uploading...' : (cvUrl() ? 'Replace CV' : label())"
+      [label]="uploading() ? 'Uploading...' : (cvUrl() ? 'Replace CV' : 'Upload CV (PDF)')"
       [loading]="uploading()"
       severity="secondary">
     </span>

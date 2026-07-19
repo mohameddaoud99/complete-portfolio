@@ -63,6 +63,26 @@ export class StorageService {
     return this.remove('resumes/current-cv.pdf');
   }
 
+  uploadResumeFr(file: File): Observable<StorageUploadResult> {
+    const path = 'resumes/current-cv-fr.pdf';
+    return from(
+      this.supabase.client.storage
+        .from(this.bucket)
+        .upload(path, file, { cacheControl: '0', upsert: true })
+        .then(({ data, error }) => {
+          if (error) throw error;
+          const { data: urlData } = this.supabase.client.storage
+            .from(this.bucket)
+            .getPublicUrl(data.path);
+          return { path: data.path, publicUrl: `${urlData.publicUrl}?t=${Date.now()}` };
+        })
+    );
+  }
+
+  removeResumeFr(): Observable<void> {
+    return this.remove('resumes/current-cv-fr.pdf');
+  }
+
   getPublicUrl(path: string): string {
     const { data } = this.supabase.client.storage.from(this.bucket).getPublicUrl(path);
     return data.publicUrl;
