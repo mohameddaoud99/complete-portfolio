@@ -42,7 +42,12 @@ export class AboutPage implements OnInit {
   readonly resumeUrl = computed(() => {
     const p = this.profile();
     if (!p) return null;
-    return this.i18n.lang() === 'fr' && p.resumeUrlFr ? p.resumeUrlFr : p.resumeUrl;
+    const isFr = this.i18n.lang() === 'fr';
+    const url = isFr && p.resumeUrlFr ? p.resumeUrlFr : p.resumeUrl;
+    const filename = isFr && p.resumeFilenameFr ? p.resumeFilenameFr : p.resumeFilename;
+    if (!url) return null;
+    const base = url.split('?')[0];
+    return filename ? `${base}?download=${encodeURIComponent(filename)}` : url;
   });
 
   certificationExtraImages(cert: Certification): string[] {

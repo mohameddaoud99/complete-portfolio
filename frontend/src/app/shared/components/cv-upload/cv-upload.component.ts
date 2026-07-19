@@ -14,6 +14,7 @@ export class CvUploadComponent {
   private readonly messageService = inject(MessageService);
 
   readonly cvUrl = model<string | null>(null);
+  readonly cvFilename = model<string | null>(null);
   readonly lang = input<'en' | 'fr'>('en');
 
   readonly uploading = signal(false);
@@ -52,6 +53,7 @@ export class CvUploadComponent {
     upload$.subscribe({
       next: (result) => {
         this.cvUrl.set(result.publicUrl);
+        this.cvFilename.set(file.name);
         this.uploading.set(false);
         this.messageService.add({ severity: 'success', summary: 'CV uploaded' });
       },
@@ -72,6 +74,7 @@ export class CvUploadComponent {
     remove$.subscribe({
       next: () => {
         this.cvUrl.set(null);
+        this.cvFilename.set(null);
         this.removing.set(false);
         this.messageService.add({ severity: 'success', summary: 'CV removed' });
       },

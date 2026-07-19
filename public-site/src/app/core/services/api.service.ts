@@ -212,6 +212,8 @@ export class ApiService {
       websiteUrl: row['website_url'] as string | null,
       resumeUrl: row['resume_url'] as string | null,
       resumeUrlFr: row['resume_url_fr'] as string | null,
+      resumeFilename: row['resume_filename'] as string | null,
+      resumeFilenameFr: row['resume_filename_fr'] as string | null,
       seoTitle: row['seo_title'] as string | null,
       seoDescription: row['seo_description'] as string | null,
       updatedAt: row['updated_at'] as string

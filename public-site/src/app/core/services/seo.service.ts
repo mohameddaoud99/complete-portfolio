@@ -36,6 +36,19 @@ export class SeoService {
     }
   }
 
+  setFavicon(url: string): void {
+    const existing = this.document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (existing) {
+      existing.href = url;
+    } else {
+      const link = this.document.createElement('link');
+      link.rel = 'icon';
+      link.type = 'image/png';
+      link.href = url;
+      this.document.head.appendChild(link);
+    }
+  }
+
   private injectJsonLd(data: Record<string, unknown>): void {
     this.document.getElementById('structured-data')?.remove();
     const script = this.document.createElement('script');

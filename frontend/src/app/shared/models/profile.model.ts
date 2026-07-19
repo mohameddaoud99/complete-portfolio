@@ -15,6 +15,8 @@ export interface Profile {
   websiteUrl: string | null;
   resumeUrl: string | null;
   resumeUrlFr: string | null;
+  resumeFilename: string | null;
+  resumeFilenameFr: string | null;
   seoTitle: string | null;
   seoDescription: string | null;
   updatedAt: string;

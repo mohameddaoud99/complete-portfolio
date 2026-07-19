@@ -25,6 +25,8 @@ export class ProfileEditPage implements OnInit {
   readonly avatarUrl = signal<string | null>(null);
   readonly cvUrl = signal<string | null>(null);
   readonly cvUrlFr = signal<string | null>(null);
+  readonly cvFilename = signal<string | null>(null);
+  readonly cvFilenameFr = signal<string | null>(null);
 
   readonly form = this.formBuilder.nonNullable.group({
     fullName: ['', Validators.required],
@@ -49,6 +51,8 @@ export class ProfileEditPage implements OnInit {
       this.avatarUrl.set(profile.avatarUrl);
       this.cvUrl.set(profile.resumeUrl ?? null);
       this.cvUrlFr.set(profile.resumeUrlFr ?? null);
+      this.cvFilename.set(profile.resumeFilename ?? null);
+      this.cvFilenameFr.set(profile.resumeFilenameFr ?? null);
       this.form.patchValue({
         fullName: profile.fullName,
         title: profile.title ?? '',
@@ -75,7 +79,7 @@ export class ProfileEditPage implements OnInit {
     }
 
     this.saving.set(true);
-    this.profileService.update(this.profileId()!, { ...this.form.getRawValue(), avatarUrl: this.avatarUrl(), resumeUrl: this.cvUrl(), resumeUrlFr: this.cvUrlFr() }).subscribe({
+    this.profileService.update(this.profileId()!, { ...this.form.getRawValue(), avatarUrl: this.avatarUrl(), resumeUrl: this.cvUrl(), resumeUrlFr: this.cvUrlFr(), resumeFilename: this.cvFilename(), resumeFilenameFr: this.cvFilenameFr() }).subscribe({
       next: () => {
         this.saving.set(false);
         this.messageService.add({ severity: 'success', summary: 'Profile updated' });
